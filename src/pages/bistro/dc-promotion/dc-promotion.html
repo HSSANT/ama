@@ -1,0 +1,30 @@
+<ion-header>
+    <dc-header title="Promocoes" [showSearchBar]="false"></dc-header>
+</ion-header>
+
+<ion-content>
+    <div class="dc-content">
+        <div class="dc-section section-promotion" (click)="gotoDiscountDetail(promotion)" *ngFor="let promotion of promotions; let i = index">
+            <ion-row>
+                <ion-col col-4 class="col-img">
+                    <div class="image-container">
+                        <img src="{{promotion.image}}" alt="image">
+                    </div>
+                </ion-col>
+                <ion-col col-8 class="col-text">
+                    <span class="title">
+                        {{promotion.title}}
+                      <span class="new" *ngIf="promotion.isNew">
+                        <img src="assets/bistro/images/promotion/icon_new.png" alt="new">
+                      </span>
+                    </span>
+                    <span class="des">{{promotion.store}}</span>
+                    <span class="time">{{promotion.startTime.toLocaleDateString() +" - " + promotion.endTime.toLocaleDateString()}}</span>
+                    <span class="des" [innerHTML]="promotion.content"> 
+                    </span>
+                </ion-col>
+            </ion-row>
+           
+        </div>
+    </div>
+</ion-content>

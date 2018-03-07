@@ -1,0 +1,41 @@
+<ion-menu [content]="content" swipeEnabled="false" class="dc-menu" type="reveal">
+    <div *ngIf="user && !user.isLoggedIn" class="menu-header">
+        <span class="main-title">Faça o login para aproveitar as melhores Promoções!</span>
+        <div class="button-group">
+            <span class="button button-left" (click)="gotoLogin()">Login</span>
+            <span class="button button-right" (click)="gotoRegister()">Registrar-se</span>
+        </div>
+    </div>
+    <div *ngIf="user && user.isLoggedIn" class="menu-header">
+        <span class="main-title">Olá: {{user.name}}</span>
+        <div class="button-group">
+            <span class="button" (click)="logOut()">Log Out</span>
+        </div>
+    </div>
+    <div class="menu-content">
+        <div *ngFor="let item of menuItems" [class.active]="item.active" class="menu-item" (tap)="itemClick(item)">
+            <!-- <span class="icon" [innerHTML]="item.icon"> 
+            </span> -->
+            <img src="{{item.icon}}" alt="" class="icon">
+            <span class="title">{{item.title}}</span>
+        </div>
+
+        <div class="divider"></div>
+        <div class="menu-item">
+            <!-- <span class="icon">
+                <i class="fa fa-question-circle" aria-hidden="true"></i>
+            </span> -->
+            <img src="assets/bistro/images/main-icon/icon_guide.png" alt="" class="icon">
+            <span class="title" >Guia</span>
+        </div>
+        <div class="menu-item">
+            <!-- <span class="icon">
+                <i class="fa fa-info-circle" aria-hidden="true"></i>
+            </span> -->
+            <img src="assets/bistro/images/main-icon/icon_info.png" alt="" class="icon">
+            <span class="title">Informação</span>
+        </div>
+    </div>
+</ion-menu>
+
+<ion-nav id="nav" #content [root]="rootPage"></ion-nav>

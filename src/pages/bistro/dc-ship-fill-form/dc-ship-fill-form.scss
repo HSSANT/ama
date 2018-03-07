@@ -1,0 +1,67 @@
+page-dc-ship-fill-form {
+    .col {
+        padding: 0;
+    }
+    .row {
+        width: 100%;
+    }
+    .fixed-top {
+        background-color: #FFF;
+        position: absolute;
+        top: 45px;
+        left: 0;
+        width: 100%;
+        z-index: 10;
+    }
+    .header-md::after {
+        display: none;
+    }
+    .header-md {
+        border: solid 1px map-get($DCColors, primary);
+    }
+    .dc-step-group {
+        padding-top: 5px;
+        padding-bottom: 10px;
+        background-color: map-get($DCColors, primary);
+        .step {
+            color: rgba(255, 255, 255, 0.6);
+            &.active {
+                &.has-arrow::after {
+                    opacity: 1;
+                }
+                .step-title {
+                    color: map-get($DCColors, white);
+                }
+                .step-number {
+                    background-color: map-get($DCColors, white);
+                }
+            }
+            &.done {
+                .step-number {
+                    border: none;
+                    background-color: rgba(255, 255, 255, 0.5);
+                    color: map-get($DCColors, primary);
+                }
+            }
+            &.has-arrow::after {
+                opacity: .5;
+            }
+        }
+    }
+    .button-group {
+        width: 100%;
+        text-align: center;
+        .dc-button {
+            padding: 6px 26px !important;
+            margin: 5px;
+            font-size: 1em !important;
+            height: auto !important;
+        }
+        .dc-button-outline {
+            padding: 5px 26px !important;
+            margin: 5px;
+            font-size: 1em !important;
+            height: auto !important;
+        }
+    }
+}

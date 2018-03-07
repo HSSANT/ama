@@ -1,0 +1,50 @@
+<ion-header>
+    <dc-header title="Đặt chỗ" [showBackButton]="true" [showSearchBar]="false"></dc-header>
+</ion-header>
+<ion-content>
+    <span class="dc-fab" (click)="bookSeat()" ion-fixed>
+        <i class="fa fa-plus" aria-hidden="true"></i>
+    </span>
+    <div class="dc-content" *ngIf="bookedSeat.length == 0">
+        <div class="place-div">
+            <img src="assets/bistro/images/service/image_booking_1.png" alt="image">
+            <div class="button-group">
+                <span>Bạn chưa đặt chỗ nào</span>
+            </div>
+        </div>
+    </div>
+    <div class="dc-content" *ngIf="bookedSeat.length > 0">
+        <div class="seat-item" *ngFor="let seat of bookedSeat">
+            <ion-row>
+                <ion-col col-3 class="col-img">
+                    <img src="assets/bistro/images/service/icon_booking_2.png" alt="">
+                    <span class="date">{{seat.date | date: 'dd/MM'}}</span>
+                    <span class="year">{{seat.date.getFullYear()}}</span>
+                </ion-col>
+                <ion-col col-9 class="col-text">
+                    <span class="title">{{seat.userName}} - {{seat.userPhone}}</span>
+                    <div class="time-div">
+                        <span class="time">
+                            <span class="icon">
+                                    <i class="fa fa-clock-o" aria-hidden="true"></i>
+                            </span>
+                        <span>{{seat.date | date: 'HH:mm'}}</span>
+                        </span>
+                        <span class="person">
+                            <span class="icon">
+                                    <i class="fa fa-users" aria-hidden="true"></i>
+                            </span>
+                        <span>{{seat.numberOfPerson}} người</span>
+                        </span>
+                    </div>
+                    <div class="note-div">
+                        <span class="icon">
+                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                        </span>
+                        <span>{{seat.note || "Không có yêu cầu"}}</span>
+                    </div>
+                </ion-col>
+            </ion-row>
+        </div>
+    </div>
+</ion-content>

@@ -1,0 +1,28 @@
+page-discount-detail {
+    .dc-content {
+        padding: map-get($map: $DCSizes, $key: defaultPadding);
+    }
+    .discount-title {
+        font-size: map-get($map: $DCSizes, $key: big);
+        font-weight: bold;
+        color: map-get($DCColors, black);
+    }
+    .discount-time {
+        padding-top: 5px;
+        .icon {
+            color: map-get($map: $DCColors, $key: primary);
+        }
+        .time {
+            color: map-get($map: $DCColors, $key: green);
+        }
+    }
+    .image {
+        width: 100%;
+        display: block;
+        margin-bottom: 15px;
+    }
+    .discount-content {
+        margin-top: 15px;
+        color: map-get($DCColors, black);
+    }
+}

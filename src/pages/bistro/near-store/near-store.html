@@ -1,0 +1,132 @@
+<ion-header id="near-store-header">
+    <dc-header title="Delivery" [showSearchBar]="false" [showBackButton]="true" [ionContent]="shipContent"></dc-header>
+</ion-header>
+<div class="fixed-top" id="ship-fixed-top">
+    <div class="dc-step-group">
+        <div class="step" *ngFor="let step of steps" [class.active]="step.active" [class.has-arrow]="step.hasArrow">
+            <span class="step-number">{{step.number}}</span>
+            <span class="step-title">{{step.title}}</span>
+        </div>
+    </div>
+    <ion-segment [(ngModel)]="tab" class="segment-md" [class.segment-ios]="false">
+        <ion-segment-button value="popular">
+            Destaques
+        </ion-segment-button>
+        <ion-segment-button value="menu">
+            Menu
+        </ion-segment-button>
+        <ion-segment-button value="selected">
+            Seu Pedido ({{orderedFoods.length}})
+        </ion-segment-button>
+    </ion-segment>
+    <div class="search-bar" id="near-store-search-bar" *ngIf="tab!='selected'">
+        <ion-searchbar class="searchbar-ios" [class.searchbar-md]="false" placeholder="Encontre seu Prato" [(ngModel)]="keyword" (ionInput)="search($event)"></ion-searchbar>
+    </div>
+</div>
+<ion-content id="ship-ion-content" #shipContent>
+    <div class="dc-content">
+        <div id="dc-searchbar-height" [hidden]="tab=='selected'"></div>
+        <div [ngSwitch]="tab" class="segment-content">
+            <div *ngSwitchCase="'popular'" class="popular">
+                <div class="dc-section">
+                    <div class="food-item" *ngFor="let food of popularFoods">
+                        <ion-row>
+                            <ion-col col-2>
+                                <div class="image-container">
+                                    <img alt="img" src="{{food.image}}">
+                                </div>
+                            </ion-col>
+                            <ion-col col-7 class="des-item">
+                                <span class="title">{{food.titleVie}}</span>
+                                <span class="dc-price">{{food.price.toLocaleString()}} Vnđ</span>
+                            </ion-col>
+                            <ion-col col-3 class="button-item">
+                                <button *ngIf="food.quantily == 0" class="order-button dc-button" (tap)="selectFood(food, 1)">Selecione</button>
+                                <button *ngIf="food.quantily > 0" class="order-button dc-button-outline" (tap)="selectFood(food, 0)">Cancelar</button>
+                            </ion-col>
+                        </ion-row>
+                    </div>
+                </div>
+                <ion-infinite-scroll *ngIf="!popularFoodMaxItems" (ionInfinite)="loadMorePopularFoods($event)">
+                    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+                </ion-infinite-scroll>
+            </div>
+            <div *ngSwitchCase="'menu'" class="menu">
+                <div [hidden]="!category.numberOfItems" *ngFor="let category of categories; let i = index" class="dc-section collapsed" [collapse]="{button: 'near-store-collapse-button-' + i, icon: 'near-store-collapse-icon-' + i, iconClassToggle:['fa-caret-up', 'fa-caret-down'], collapsedHeight: '45px', isRemmovePadding: true}">
+                    <div class="section-header" id="near-store-collapse-button-{{i}}">
+                        <span class="title">
+                           {{category.titleVie}}
+                        </span>
+                        <span class="button-right">
+                            <i class="fa fa-caret-down" aria-hidden="true" id="near-store-collapse-icon-{{i}}"></i>
+                        </span>
+                    </div>
+                    <div class="section-body">
+                        <div class="food-item" *ngFor="let food of getFoodByCategory(category) | async">
+                            <ion-row>
+                                <ion-col col-2>
+                                    <div class="image-container">
+                                        <img alt="img" src="{{food.image}}">
+                                    </div>
+                                </ion-col>
+                                <ion-col col-7 class="des-item">
+                                    <span class="title">{{food.titleVie}}</span>
+                                    <span class="dc-price">{{food.price.toLocaleString()}} Vnđ</span>
+                                </ion-col>
+                                <ion-col col-3 class="button-item">
+                                    <button *ngIf="!food.quantily" class="order-button dc-button" (tap)="selectFood(food, 1)">Selecione</button>
+                                    <button *ngIf="food.quantily" class="order-button dc-button-outline" (tap)="selectFood(food, 0)">Cancelar</button>
+                                </ion-col>
+                            </ion-row>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div *ngSwitchCase="'selected'" class="selected">
+                <div class="dc-section">
+                    <div class="food-item" *ngFor="let food of orderedFoods">
+                        <ion-row>
+                            <ion-col col-1 class="button-item">
+                                <span class="button-remove" (tap)="selectFood(food, 0)">
+                                    <i class="fa fa-times" aria-hidden="true"></i>
+                                </span>
+                            </ion-col>
+                            <ion-col col-2 class="image-item">
+                                <div class="image-container">
+                                    <img alt="img" src="{{food.image}}">
+                                </div>
+                            </ion-col>
+                            <ion-col col-6 class="des-item">
+                                <span class="title">{{food.titleVie}}</span>
+                                <span>
+                                    <span class="dc-green">{{food.quantily}} x </span>
+                                <span class="dc-price">{{food.price.toLocaleString()}} đ</span>
+                                <span class="dc-price"> = {{(food.price * food.quantily).toLocaleString()}} đ</span>
+                                </span>
+                            </ion-col>
+                            <ion-col col-3 class="item-order">
+                                <number-picker [number]="food.quantily" (onDataChange)="changeFoodQuantily(food, $event)" min="0" max="1000"></number-picker>
+                            </ion-col>
+                        </ion-row>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- <ion-infinite-scroll *ngIf="!popularFoodMaxItems" (ionInfinite)="loadMorePopularFoods($event)">
+            <ion-infinite-scroll-content></ion-infinite-scroll-content>
+        </ion-infinite-scroll> -->
+    </div>
+
+</ion-content>
+<ion-footer class="footer" *ngIf="tab == 'selected'">
+    <div class="dc-divider"></div>
+    <div class="footer-text">
+        <span class="dc-black">Total <span class="dc-green">({{orderedFoods.length}} món)</span> :</span>
+        <span class="dc-price">{{getTotalPrice()}} Vnđ</span>
+    </div>
+    <div class="button-group">
+        <button class="footer-button dc-button-outline" (tap)="cancelOrder()">Cancelar</button>
+        <button class="footer-button dc-button" (tap)="continueOrder()">Continue</button>
+    </div>
+</ion-footer>

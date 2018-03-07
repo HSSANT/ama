@@ -1,0 +1,18 @@
+<ion-header>
+    <dc-header title="Serviços" [showSearchBar]="false"></dc-header>
+</ion-header>
+<ion-content>
+    <div class="dc-content">
+        <div class="item" (click)="gotoService(item)" *ngFor="let item of serviceItems">
+            <ion-row>
+                <ion-col col-3 class="col-img">
+                    <img src="assets/bistro/images/service/{{item.icon}}" alt="">
+                </ion-col>
+                <ion-col col-9 class="col-text">
+                    <span class="title">{{item.title}}</span>
+                    <span class="des">{{item.des}}</span>
+                </ion-col>
+            </ion-row>
+        </div>
+    </div>
+</ion-content>

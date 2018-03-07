@@ -1,0 +1,97 @@
+page-food-detail {
+    .main-image {
+        width: 100%;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        position: relative;
+        img {
+            display: block;
+            margin: 0 auto;
+            width: 36%;
+            border-radius: 50%;
+        }
+        .button {
+            $buttonSize: 2em;
+            position: absolute;
+            top: 50%;
+            -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            width: $buttonSize;
+            height: $buttonSize;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            border-radius: 50%;
+            border: solid 2px;
+            color: map-get($DCColors, primary);
+            i {
+                font-size: 1.2em;
+            }
+        }
+        .button-left {
+            left: 18%;
+        }
+        .button-right {
+            right: 18%;
+        }
+    }
+    .title-div {
+        width: 100%;
+        font-size: map-get($DCSizes, big);
+        color: map-get($DCColors, black);
+        font-weight: bold;
+        text-align: center;
+        padding: 5px 0;
+        .quantily {
+            color: map-get($DCColors, green);
+        }
+    }
+    .description-div {
+        width: 100%;
+        text-align: center;
+        color: map-get($DCColors, gray);
+    }
+    .price-div {
+        width: 100%;
+        text-align: center;
+        font-size: map-get($DCSizes, littleBig);
+        padding: 5px 0;
+        font-weight: 500;
+    }
+    .dc-section {
+        border-bottom: none;
+        .body-title {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+    }
+    .dc-divider {
+        margin-top: 5px;
+    }
+    .dc-textarea {
+        .text-input {
+            margin-bottom: 20px;
+        }
+    }
+    .col {
+        padding: 3px 0;
+    }
+    .checkbox-square {
+        .checkbox-icon {
+            border-radius: 0;
+            width: 1.2em;
+            height: 1.2em;
+            .checkbox-inner {
+                top: 0;
+                left: 3px;
+            }
+        }
+    }
+}

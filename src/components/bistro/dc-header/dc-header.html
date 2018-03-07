@@ -1,0 +1,24 @@
+<div class="dc-header">
+    <div class="header-title">
+        <span (tap)="openMenu()" class="header-button button-left" menuToggle *ngIf="!showBackButton">
+            <!-- <ion-icon name="ios-menu-outline"></ion-icon> -->
+            <img class="icon" src="assets/bistro/images/main-icon/btn_menuside.png" alt="">
+        </span>
+        <span class="header-button button-left" navPop *ngIf="showBackButton">
+            <!-- <ion-icon name="{{backButton}}"></ion-icon> -->
+            <img class="icon" src="{{backButton}}" alt="">            
+        </span>
+        <span class="title dc-big" (tap)="scrollToTop()">
+         {{title}}
+        </span>
+        <span *ngIf="showOrder" class="header-button button-right" >
+            <!-- <ion-icon name="ios-analytics-outline"></ion-icon> -->
+            <!-- <img class="icon" src="assets/bistro/images/main-icon/btn_order.png" alt="">    -->
+            <ion-icon name="cart"></ion-icon>
+            <span class="order-number" *ngIf="orderedFood.length">{{orderedFood.length}}</span>
+        </span>
+    </div>
+    <div class="search-bar" *ngIf="showSearchBar">
+        <ion-searchbar class="searchbar-ios" [class.searchbar-md]="false" placeholder="{{placholder}}" [(ngModel)]="searchKeyword" (ionInput)="search()"></ion-searchbar>
+    </div>
+</div>

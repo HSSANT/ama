@@ -1,0 +1,36 @@
+{
+    "version": "1.0",
+    "app-config": {
+        "menu-item": [{
+                "icon": "assets/bistro/images/main-icon/icon_home.png",
+                "title": "Home",
+                "page": "DcHomePage",
+                "active": false
+            },
+            {
+                "icon": "assets/bistro/images/main-icon/icon_menu.png",
+                "title": "Menu",
+                "page": "DcMenuPage",
+                "active": false
+            },
+            {
+                "icon": "assets/bistro/images/main-icon/icon_promotion.png",
+                "title": "Promocoes",
+                "page": "DcPromotionPage",
+                "active": false
+            },
+            {
+                "icon": "assets/bistro/images/main-icon/icon_support.png",
+                "title": "Servicos",
+                "page": "DcServicePage",
+                "active": false
+            },
+            {
+                "icon": "assets/bistro/images/main-icon/icon_home.png",
+                "title": "Próximo de Você",
+                "page": "NearStorePage",
+                "active": false
+            }
+        ]
+    }
+}

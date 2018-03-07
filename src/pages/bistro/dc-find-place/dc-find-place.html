@@ -1,0 +1,114 @@
+<ion-header>
+    <dc-header title="Escolha o Local" [showSearchBar]="false" [showBackButton]="true"></dc-header>
+</ion-header>
+<ion-content class="has-map" id="dc-find-place-content">
+    <div id="dc-find-place-map"></div>
+    <span class="button-center" *ngIf="tab=='map'">
+        <img src="assets/bistro/images/service/icon_marker.png" alt="">
+    </span>
+    <div class="dc-content">
+        <ion-segment [(ngModel)]="tab" (ionChange)="tabChange()" class="dc-segment segment-md" [class.segment-ios]="false">
+            <ion-segment-button value="google">
+                Google
+            </ion-segment-button>
+            <ion-segment-button value="map">
+                Mapa
+            </ion-segment-button>
+        </ion-segment>
+        <div class="search-bar" [class.over-map]="tab=='map'">
+            <ion-searchbar *ngIf="tab == 'google'" class="searchbar-ios" [class.searchbar-md]="false" placeholder="{{placholder}}" [(ngModel)]="searchKeyword" (ionInput)="search()"></ion-searchbar>
+            <div class="address-bar" *ngIf="tab == 'map'">
+                <span class="icon icon-left">
+                    <img src="assets/bistro/images/service/icon_location.png" alt="">
+                </span>
+                <span class="address">{{mapAddress?mapAddress.name:"Destino"}}</span>
+                <span class="icon icon-right button-non-favourite" (click)="mapFavouriteClick(mapAddress,mapFavourite)" #mapFavourite>
+                    <img class="non-favourite" src="assets/bistro/images/service/btn_favourite_1.png" alt="">
+                    <img class="favourite" src="assets/bistro/images/service/btn_favourite_2.png" alt="">
+                </span>
+            </div>
+        </div>
+
+        <div class="dc-segment-content">
+            <div class="google" *ngIf="tab == 'google'">
+                <div [hidden]="true" id="dc-place-search-result"></div>
+                <div class="section" *ngIf="addressResult.length > 0">
+                    <div class="section-header">
+                        <span class="title">Resultado da Pesquisa</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="item" *ngFor="let address of addressResult" (click)="selectItem(address)">
+                            <ion-row>
+                                <ion-col col-1 class="col-img">
+                                    <span class="icon">
+                                        <img src="assets/bistro/images/service/icon_location.png" alt="">
+                                    </span>
+                                </ion-col>
+                                <ion-col col-10 class="col-text">
+                                    <span class="place">{{address.name}}</span>
+                                    <span class="time">{{address.address}}</span>
+                                </ion-col>
+                                <ion-col col-1 class="col-img button-non-favourite" (click)="favouriteIconClick(address, searchResultItemIcon, $event)" #searchResultItemIcon>
+                                    <span class="icon ">
+                                        <img class="non-favourite" src="assets/bistro/images/service/btn_favourite_1.png" alt="">
+                                        <img class="favourite" src="assets/bistro/images/service/btn_favourite_2.png" alt="">
+                                    </span>
+                                </ion-col>
+                            </ion-row>
+                        </div>
+                    </div>
+                </div>
+                <div class="section">
+                    <div class="section-header">
+                        <span class="title">Recentes</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="item" *ngFor="let address of recentAddress" (tap)="selectItem(address)">
+                            <ion-row>
+                                <ion-col col-1 class="col-img">
+                                    <span class="icon">
+                                          <img src="assets/bistro/images/service/icon_recent.png" alt="">
+                                        </span>
+                                </ion-col>
+                                <ion-col col-11 class="col-text">
+                                    <span class="place">{{address.name}}</span>
+                                    <span class="time">{{getDiffTime(address.time)}}</span>
+                                </ion-col>
+                            </ion-row>
+                        </div>
+                    </div>
+                    <div class="dc-divider"></div>
+                </div>
+                <div class="section">
+                    <div class="section-header">
+                        <span class="title">Favoritos</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="item" *ngFor="let address of favouriteAddress" (click)="selectItem(address)">
+                            <ion-row>
+                                <ion-col col-1 class="col-img button-favourite" (click)="favouriteIconClick(address, favouriteItemIcon, $event)" #favouriteItemIcon>
+                                    <span class="icon ">
+                                        <img class="non-favourite" src="assets/bistro/images/service/btn_favourite_1.png" alt="">
+                                        <img class="favourite" src="assets/bistro/images/service/btn_favourite_2.png" alt="">
+                                    </span>
+                                </ion-col>
+                                <ion-col col-11 class="col-text">
+                                    <span class="place">{{address.name}}</span>
+                                </ion-col>
+                            </ion-row>
+                        </div>
+                    </div>
+                    <div class="dc-divider"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ion-content>
+<ion-footer class="dc-footer footer-ios" *ngIf="tab == 'map'" [class.footer-md]="false">
+    <div class="button-group">
+        <button class="dc-button" (click)="confirmPlace()" [disabled]="isMapDragging || !mapAddress">Confirme o Endereço</button>
+        <span class="button-location" (click)="gotoMyLocation()">
+            <img src="assets/bistro/images/service/btn_my_location.png" alt="">
+        </span>
+    </div>
+</ion-footer>

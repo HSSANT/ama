@@ -1,0 +1,47 @@
+<ion-header>
+    <dc-header title="Torne-se um Parceiro" [showBackButton]="true" [showSearchBar]="false"></dc-header>
+</ion-header>
+<ion-content>
+    <div class="dc-content">
+        <div class="dc-banner">
+            <img src="assets/bistro/images/service/image_help.png" alt="">
+            <div class="des">
+                <span>
+                 Preencha o Formulário e entraremos em contato
+              </span>
+            </div>
+        </div>
+        <form (ngSubmit)="continue()" [formGroup]="form">
+            <div class="dc-form">
+                <ion-row>
+                    <ion-col col-12>
+                        <div class="input-div">
+                            <span class="icon">
+                               <img src="assets/bistro/images/login/icon_phone.png" alt="">
+                            </span>
+                            <ion-input [(ngModel)]="table" type="tel" formControlName="table" placeholder="Telefone do Propietário"></ion-input>
+                            <span class="button-right">
+                                <i class="fa fa-caret-down" aria-hidden="true"></i>
+                            </span>
+                        </div>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col col-12>
+                        <div class="input-div">
+                            <span class="icon"> 
+                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                        </span>
+                            <ion-input [(ngModel)]="note" formControlName="note" placeholder="Nome do Propietário"></ion-input>
+                        </div>
+                    </ion-col>
+                </ion-row>
+            </div>
+            <div class="error-message">{{errorMessage}}</div>
+            <div class="button-group">
+
+                <button ion-button class="dc-button">Enviar</button>
+            </div>
+        </form>
+    </div>
+</ion-content>

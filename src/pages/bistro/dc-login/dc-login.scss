@@ -1,0 +1,133 @@
+page-dc-login {
+    .logo-image {
+        width: 100%;
+        padding: 3em;
+        text-align: center;
+        img {
+            width: 50%;
+        }
+    }
+    // .login-form {
+    //     text-align: center;
+    //     padding: 10px 0;
+    //     background-color: #f9f9f9;
+    //     .input-div {
+    //         padding: 0 15%;
+    //         position: relative;
+    //         $inputHeight: 2.5em;
+    //         margin: 10px 0;
+    //         .icon {
+    //             position: absolute;
+    //             left: 20%;
+    //             top: 50%;
+    //             width: 0.5*$inputHeight;
+    //             height: 0.5*$inputHeight;
+    //             transform: translateY(-50%);
+    //             line-height: $inputHeight;
+    //             color: map-get($DCColors, primary);
+    //             &.valid {
+    //                 color: map-get($DCColors, green);
+    //             }
+    //         }
+    //         .text-input {
+    //             text-align: center;
+    //             border-radius: 20px;
+    //             border: solid 1px map-get($DCColors, gray);
+    //             color: map-get($DCColors, gray);
+    //             height: $inputHeight;
+    //             font-size: 1em;
+    //             padding: .5em;
+    //             // padding-left: 1.5*$inputHeight;
+    //             width: 100%;
+    //             margin: 0;
+    //         }
+    //     }
+    // }
+    .login-button {
+        width: 100%;
+        text-align: center;
+        padding: 20px 15%;
+        .dc-button {
+            display: block;
+            width: 100%;
+            font-size: 1em;
+        }
+    }
+    .divider {
+        width: 100%;
+        text-align: center;
+        padding: 0 15%;
+        position: relative;
+        .line {
+            width: 100%;
+            height: 1px;
+            background-color: map-get($DCColors, lightgray);
+        }
+        .divider-text {
+            color: map-get($DCColors, black);
+            display: inline-block;
+            padding: 5px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate3d(-50%, -50%, 0);
+            background-color: #FFF;
+        }
+    }
+    .social-login {
+        margin-top: 20px;
+        padding: 10px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        $socialSize: 4em;
+        .social-button {
+            border-radius: 50%;
+            width: $socialSize;
+            height: $socialSize;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background-color: #123;
+            color: #FFF;
+            margin: 0 10px;
+            i {
+                font-size: 2em;
+            }
+            &.facebook-button {
+                background-color: #5285c6;
+            }
+            &.google-button {
+                background-color: #ff5a60;
+            }
+        }
+    }
+    .register-button {
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+        margin-top: 20px;
+        span {
+            color: map-get($DCColors, primary);
+            font-weight: 500;
+            padding: 5px;
+        }
+    }
+    .ng-touched.ng-invalid:not(form) {
+        .text-input {
+            border-color: rgba(187, 43, 51, 0.6);
+        }
+    }
+    .ng-touched.ng-valid:not(form) {
+        .text-input {
+            border-color: map-get($DCColors, gray);
+            color: map-get($DCColors, gray);
+        }
+    }
+    .validate-message {
+        margin-top: 5px;
+        display: block;
+        color: gray;
+    }
+}

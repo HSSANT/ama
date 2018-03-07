@@ -1,0 +1,62 @@
+page-dc-promotion {
+    .section-promotion {
+        $lineHeight: 1.5em;
+        line-height: $lineHeight;
+        padding: 10px 0;
+        .col {
+            padding: 0;
+        }
+        .col-text {
+            padding-right: 10px;
+            .title {
+                font-size: map-get($DCSizes, littleBig);
+                font-weight: bold;
+                color: map-get($DCColors, black);
+                padding: 5px 0 3px;
+                width: 100%;
+                display: block;
+                .new {
+                    display: inline-block;
+                    height: 1.1em;
+                    vertical-align: middle;
+                    margin-left: 5px;
+                    img {
+                        display: block;
+                        height: 100%;
+                    }
+                }
+            }
+            .time {
+                color: map-get($DCColors, green);
+                font-style: italic;
+                display: block;
+                width: 100%;
+            }
+            .des {
+                color: map-get($DCColors, gray);
+                display: block;
+                max-height: 3* $lineHeight;
+                overflow: hidden;
+                width: 100%;
+                p {
+                    margin: 0;
+                    padding: 0;
+                }
+            }
+        }
+        .col-img {
+            .image-container {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                display: flex;
+                padding: 0 10px;
+                img {
+                    object-fit: cover;
+                }
+            }
+        }
+    }
+}

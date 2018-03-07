@@ -1,0 +1,5 @@
+Busino Native And Modules
+cordova plugin add https://github.com/mapsplugin/cordova-plugin-googlemaps-sdk --nofetch
+ionic cordova plugin add cordova-plugin-googlemaps --variable API_KEY_FOR_ANDROID="AIzaSyDrQKIeX2hZ4dmykyWQLVGM9vBfg_y-FIM" --variable API_KEY_FOR_IOS="AIzaSyBoaR4bZhwCNl_FtdqJpZxSSFpg7S9qU-Y"
+npm install --save @ionic-native/google-maps
+npm install ts-md5 --save

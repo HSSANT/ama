@@ -1,0 +1,68 @@
+<ion-header>
+    <dc-header title="Fatura temporária" [showSearchBar]="false" [showBackButton]="true" [showOrder]="false"></dc-header>
+</ion-header>
+
+
+<ion-content>
+    <div class="dc-content" *ngIf="orderList.length > 0">
+        <div class="dc-section" *ngFor="let item of orderList; let i = index">
+            <div class="food-item" [class.active]="item.quantity > 0">
+                <div class="item-image">
+                    <img src="{{item.image}}" alt="img">
+                </div>
+                <div class="item-des">
+                    <span class="title">{{item.titleVie}}</span>
+                    <span class="des" [attr.id]="'dc-order-collapse-button-'+i">
+                      {{item?.des?item?.des:"Ghi chú"}}
+                      <span class="toggle-button">
+                          <i class="fa fa-caret-up" aria-hidden="true" [attr.id]="'dc-order-collapse-icon-'+i"></i>
+                      </span>
+                    </span>
+                </div>
+                <div class="item-order">
+                    <number-picker [number]="item.quantily" (onDataChange)="changeFoodQuantily(item, $event)" min="0" max="1000"></number-picker>
+                    <span class="price-div">
+                         <span class="dc-price">{{item.price.toLocaleString()}} đ</span>
+                    </span>
+                </div>
+            </div>
+            <div class="des-detail" [collapse]="{button: 'dc-order-collapse-button-' + i, icon: 'dc-order-collapse-icon-' + i, iconClassToggle:['fa-caret-up', 'fa-caret-down'], collapsedHeight: '0', isRemmovePadding: true}">
+                <ion-row *ngFor="let parallelFood of item.parallelFoods">
+                    <ion-col col-1>
+                        <ion-checkbox class="checkbox-square checkbox-ios" [class.checkbox-md]="false" color="dcPrimary" (ionChange)="selectParallelFood(parallelFood, $event)" [checked]="parallelFood.quantily"></ion-checkbox>
+                    </ion-col>
+                    <ion-col text-left>
+                        <span>{{parallelFood.titleVie}} </span>
+                    </ion-col>
+                    <ion-col text-right>
+                        <span class="dc-price dc-bold dc-little-big">
+                          {{parallelFood.price.toLocaleString()}} đ
+                        </span>
+                    </ion-col>
+                </ion-row>
+                <ion-textarea class="dc-textarea" placeholder="Ghi yêu cầu" [(ngModel)]="item.note" (ionChange)="caculateTotalPrice()">
+
+                </ion-textarea>
+            </div>
+        </div>
+    </div>
+    <div class="dc-content" *ngIf="orderList.length ==0">
+        <div class="place-div">
+            <img src="assets/bistro/images/service/image_booking_1.png" alt="image">
+            <div class="button-group">
+                <span>Você ainda não encomendou nada</span>
+                <button (click)="gotoMenuPage()" class="dc-button">Menu</button>
+            </div>
+        </div>
+    </div>
+</ion-content>
+
+<ion-footer *ngIf="orderList.length > 0" class="dc-footer footer-ios" [class.footer-md]="false">
+    <div class="button-group">
+        <ion-row style="width: 100%; padding: 0 16px">
+            <ion-col text-right><span class="text">Tổng tiền: <span class="dc-price">{{totalPrice.toLocaleString()}} đ</span></span>
+            </ion-col>
+            <ion-col text-left><button class="dc-button" (click)="order()" nowrap>ĐẶT MÓN</button></ion-col>
+        </ion-row>
+    </div>
+</ion-footer>

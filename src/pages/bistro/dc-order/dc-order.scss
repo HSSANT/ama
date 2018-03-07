@@ -1,0 +1,73 @@
+page-dc-order {
+    .dc-textarea .text-input {
+        background-color: #FFF;
+    }
+    .col {
+        padding: 3px 0;
+    }
+    .checkbox-square {
+        .checkbox-icon {
+            border-radius: 0;
+            width: 1.2em;
+            height: 1.2em;
+            .checkbox-inner {
+                top: 0;
+                left: 3px;
+            }
+        }
+    }
+    .des-detail {
+        padding: 10px map-get($DCSizes, defaultPadding);
+        background-color: #f9f9f9;
+        box-sizing: border-box;
+    }
+    .food-item {
+        border-bottom: none;
+    }
+    .toggle-button {
+        padding: 0 .5em;
+        color: map-get($DCColors, primary);
+        i {
+            font-size: 1.2em;
+        }
+    }
+    .dc-section {
+        // padding-bottom: 15px;
+        &:last-child {
+            border-bottom: solid 1px map-get($DCColors, lightgray) !important;
+        }
+    }
+    .dc-footer {
+        .button-group {
+            padding: 10px 0 10px 0;
+            .dc-button {
+                padding: 5px 20px;
+                margin-left: 15px;
+            }
+            .text {
+                padding: 3px;
+                font-weight: 500;
+                display: inline-block;
+            }
+        }
+    }
+    .place-div {
+        img {
+            display: block;
+            width: 30%;
+            margin: 7em auto 2em auto;
+        }
+        .button-group {
+            width: 100%;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            span {
+                color: map-get($DCColors, gray);
+                margin-bottom: 15px;
+            }
+        }
+    }
+}

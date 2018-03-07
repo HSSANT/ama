@@ -1,0 +1,39 @@
+<ion-header>
+    <dc-header (onSearch)="search($event)" [ionContent]="content"> </dc-header>
+</ion-header>
+<ion-content id="dc-home-content">
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <div class="dc-loading">
+            <div class="circle"></div>
+        </div>
+    </ion-refresher>
+    <div class="dc-content">
+        <div class="slide">
+            <ion-slides pager="true" autoplay="3000">
+                <ion-slide *ngFor="let discount of discounts" (click)="gotoDiscountDetail(discount)">
+                    <img src="{{discount.image}}" alt="slide">
+                </ion-slide>
+
+            </ion-slides>
+        </div>
+        <div [hidden]="!category.numberOfItems" #itemCategory class="dc-section" *ngFor="let category of showCategories">
+            <div class="section-header">
+                <span class="title">{{category.titleVie}}</span>
+                <span class="button-right round" (click)="goToMenu(category)">Ver Todos</span>
+            </div>
+            <div class="section-body horizontal-scroll">
+                <div *ngFor="let food of getFoodByCategory(category) | async" class="item" (click)="gotoDetail(food)">
+                    <div class="item-image">
+                        <img src="{{food.image}}" alt="image">
+                    </div>
+                    <span class="title">{{food.titleVie}}</span>
+                    <span class="dc-price">{{food.currency}}{{food.price.toLocaleString()}} </span>
+                </div>
+            </div>
+        </div>
+        <ion-infinite-scroll *ngIf="categoryIndex < categories.length" (ionInfinite)="doInfinite($event)">
+            <ion-infinite-scroll-content></ion-infinite-scroll-content>
+        </ion-infinite-scroll>
+
+    </div>
+</ion-content>

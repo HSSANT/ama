@@ -1,0 +1,25 @@
+<ion-header>
+    <dc-header (onSearch)="search($event)" [showSearchBar]="false" [showBackButton]="true" [title]="'Promoções'"> </dc-header>
+</ion-header>
+
+
+<ion-content>
+    <div class="dc-content" *ngIf="discount">
+        <div class="image">
+            <img src="{{discount.image}}" alt="image">
+        </div>
+        <div class="discount-title">
+            <span>{{discount.title}}</span>
+        </div>
+        <div class="discount-time">
+            <span class="icon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+            <span class="time">{{discount.startTime.toLocaleDateString()}} - {{discount.endTime.toLocaleDateString()}}</span>
+        </div>
+        <div class="discount-content" [innerHTML]="discount.content">
+        </div>
+   
+    </div>
+
+
+    
+</ion-content>

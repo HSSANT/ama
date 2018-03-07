@@ -1,0 +1,53 @@
+<ion-header>
+    <dc-header title="Informe seu Local" [showBackButton]="true" [showSearchBar]="false"></dc-header>
+</ion-header>
+<ion-content>
+    <div class="dc-content">
+        <div class="dc-banner">
+            <img src="assets/bistro/images/service/image_taxi.png" alt="">
+            <div class="des">
+                <span>
+                    Informe seu Local para encontramos as melhores promoçoes
+              </span>
+            </div>
+        </div>
+        <form (ngSubmit)="continue()" [formGroup]="form">
+            <div class="dc-form">
+                <ion-row>
+                    <ion-col col-12>
+                        <div class="input-div" (click)="pickPlace($event)">
+                            <span class="icon">
+                                <i class="fa fa-map-marker" aria-hidden="true"></i>
+                            </span>
+                            <!-- <ion-input [(ngModel)]="address" type="text" formControlName="address" placeholder="Điểm đến"></ion-input> -->
+                            <span class="text-input" [ngClass]="{'dc-gray': !currentAddress, 'dc-balack': currentAddress}">{{getTarget(currentAddress)}}</span>
+                        </div>
+                    </ion-col>
+                </ion-row>
+                <!-- <ion-row>
+                    <ion-col col-6>
+                        <div class="input-div">
+                            <span class="icon">
+                                <i class="fa fa-users" aria-hidden="true"></i>
+                            </span>
+                            <ion-input [(ngModel)]="person" type="tel" formControlName="person" placeholder="Número de pessoas"></ion-input>
+                        </div>
+                    </ion-col>
+                    <ion-col col-6>
+                        <div class="input-div">
+                            <span class="icon">
+                                <i class="fa fa-car" aria-hidden="true"></i>
+                            </span>
+                            <ion-input [(ngModel)]="car" type="text" formControlName="car" placeholder="Tipo de veículo"></ion-input>
+                        </div>
+                    </ion-col>
+                </ion-row> -->
+
+            </div>
+            <div class="error-message">{{errorMessage}}</div>
+            <div class="button-group">
+                <button ion-button class="dc-button">Buscar</button>
+            </div>
+        </form>
+    </div>
+</ion-content>

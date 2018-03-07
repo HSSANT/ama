@@ -1,0 +1,593 @@
+// http://ionicframework.com/docs/theming/
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+$headerRowHeight: 45px;
+.dc-header {
+    font-size: .8em;
+    color: map-get($DCColors, black);
+}
+
+.dc-content {
+    font-size: .8em;
+    color: map-get($DCColors, black);
+}
+
+[nowrap] {
+    white-space: nowrap;
+}
+
+.italic {
+    font-style: italic;
+}
+
+.dc-big {
+    font-size: map-get($DCSizes, big);
+}
+
+.dc-little-big {
+    font-size: map-get($DCSizes, littleBig);
+}
+
+.dc-small {
+    font-size: map-get($DCSizes, small);
+}
+
+.dc-black {
+    color: map-get($DCColors, black);
+}
+
+.dc-gray {
+    color: map-get($DCColors, gray);
+}
+
+.dc-green {
+    color: map-get($DCColors, green);
+}
+
+.dc-blue {
+    color: map-get($DCColors, blue);
+}
+
+.dc-bold {
+    font-weight: 500;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.dc-textarea {
+    .text-input {
+        border-radius: 10px;
+        border: solid 1px map-get($DCColors, lightgray);
+        padding: 8px;
+        width: 100%;
+    }
+}
+
+.dc-price {
+    font-weight: 500;
+    color: map-get($DCColors, orange);
+}
+// .dc-price::before{
+//     content:"R$";
+// }
+.minutos::after{
+    content:" Minutos";
+}
+
+
+.dc-menu {
+    &.show-menu {
+        .show-backdrop {
+            display: block;
+            background-color: #123;
+            width: 100%;
+            height: 100%;
+            opacity: .7;
+        }
+    }
+    @keyframes zIndex {
+        0% {
+            z-index: 1;
+        }
+        100% {
+            z-index: 1;
+        }
+    }
+    @keyframes opacity {
+        0% {
+            opacity: .01;
+        }
+        100% {
+            opacity: .7;
+        }
+    }
+    .menu-inner {
+        background-color: map-get($DCColors, primary);
+        color: map-get($DCColors, white);
+    }
+    .menu-header {
+        text-align: center;
+        line-height: 1.8em;
+        padding: 16px;
+        .button-group {
+            width: 100%;
+            text-align: center;
+            font-size: .9em;
+            margin-top: 5px;
+            .button {
+                display: inline-block;
+                padding: 0 10px;
+                border: solid 1px map-get($DCColors, white);
+                border-radius: 20px;
+                line-height: 1.8em;
+                margin: 5px;
+            }
+        }
+    }
+    .menu-content {
+        font-size: .9em;
+        .divider {
+            height: 1px;
+            background-color: map-get($DCColors, lightgray);
+            width: 85%;
+            width: calc(100% - 40px);
+            margin: 10px auto;
+        }
+        .menu-item {
+            height: 3em;
+            line-height: 3em;
+            display: flex;
+            overflow: hidden;
+            white-space: nowrap;
+            padding: 0 16px 0 20px;
+            &:first-child {
+                border-top: solid 1px #98262e;
+            }
+            &.active {
+                background-color: #98262e;
+                border-left: solid 6px map-get($DCColors, yellow);
+                font-weight: bold;
+                padding-left: 14px;
+            }
+            .icon {
+                font-size: 1.2em;
+                margin: auto 0;
+                margin-right: 8px;
+                color: map-get($DCColors, yellow);
+                width: 1.2em;
+                height: 1.2em;
+                display: inline-block;
+                i,
+                ion-icon {
+                    vertical-align: middle;
+                }
+            }
+        }
+    }
+}
+
+.dc-button {
+    padding: 8px 16px;
+    border-radius: 20px;
+    color: map-get($DCColors, white);
+    background-color: map-get($DCColors, primary);
+}
+
+.dc-button-outline {
+    padding: 8px 16px;
+    border-radius: 20px;
+    color: map-get($DCColors, primary);
+    background-color: map-get($DCColors, white);
+    border: solid 1px;
+}
+
+.dc-step-group {
+    display: flex;
+    width: 100%;
+    .step {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        color: map-get($DCColors, gray);
+        justify-content: flex-start;
+        align-items: center;
+        min-width: 25%;
+        &.active {
+            .step-number {
+                color: map-get($DCColors, primary);
+            }
+            .step-title {
+                color: map-get($DCColors, black);
+                font-weight: 500;
+            }
+        }
+        &.has-arrow {
+            position: relative;
+            &::after {
+                content: '\2192';
+                display: block;
+                position: absolute;
+                right: -2.5em;
+                top: 0;
+                width: 3em;
+                height: 2em;
+                text-align: left;
+                font-size: 1.5em;
+                line-height: .9em;
+                color: map-get($DCColors, yellow);
+            }
+        }
+        .step-number {
+            width: 1.5em;
+            height: 1.5em;
+            line-height: 1.5em;
+            text-align: center;
+            border: solid 1px;
+            border-radius: 20px;
+            margin-bottom: 5px;
+            padding: 0 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .step-title {
+            text-align: center;
+        }
+    }
+}
+
+.dc-content {
+    padding-bottom: 20px;
+    .dc-section:last-child {
+        border-bottom: none;
+    }
+}
+
+.dc-footer {
+    font-size: .8em;
+    .button-group {
+        background-color: map-get($map: $DCColors, $key: white);
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        padding: 10px 0 20px 0;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        -webkit-box-shadow: 0px -1px 10px rgba(17, 34, 51, 0.1);
+        box-shadow: 0px -1px 10px rgba(17, 34, 51, 0.1);
+        border-top: solid 1px map-get($DCColors, lightgray);
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        .dc-button,
+        .dc-button-outline {
+            font-size: 1em;
+            padding: 5px 10px;
+            margin: 0 5px;
+        }
+    }
+}
+
+.fixed-top {
+    font-size: .8em;
+    background-image: url('/assets/images/main-icon/top_bar_3.png');
+    background-position: 0px -1 * $headerRowHeight;
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    background-color: map-get($DCColors, primary) !important;
+    .segment {
+        background-color: #FFF;
+    }
+    .dc-step-group {
+        background-color: transparent;
+    }
+}
+
+.dc-section {
+    border-bottom: solid 1px map-get($DCColors, lightgray);
+    background-color: map-get($DCColors, white);
+    line-height: 1.5em;
+    color: map-get($DCColors, black);
+    .section-header {
+        height: 3em;
+        position: relative;
+        line-height: 3em;
+        padding: 0 map-get($DCSizes, defaultPadding);
+        .title {
+            font-size: map-get($DCSizes, big);
+            font-weight: 500;
+            color: map-get($DCColors, red);
+        }
+        .button-right {
+            position: absolute;
+            height: 1.6em;
+            top: .75em;
+            right: map-get($DCSizes, paddingRight);
+            line-height: 1.5em;
+            padding: 0 10px;
+            display: block;
+            color: map-get($DCColors, red);
+            &.round {
+                border-radius: 20px;
+                border: solid 1px map-get($DCColors, red);
+            }
+        }
+    }
+    .horizontal-scroll {
+        display: flex;
+        width: 100%;
+        overflow: auto;
+        padding: 0 16px;
+    }
+    .section-body {
+        padding: 0 map-get($DCSizes, paddingRight) 0 map-get($DCSizes, defaultPadding);
+        width: 100%;
+        margin: 5px 0 10px 0;
+        .item {
+            width: 30%;
+            padding: 0 5px;
+            display: inline-block;
+            min-width: 30%;
+            flex-basis: 30%;
+            .title {
+                display: block;
+                width: 100%;
+                text-align: center;
+                margin-top: 5px;
+                max-height: 3em;
+                overflow: hidden;
+            }
+            .item-image {
+                width: 100%;
+                height: 60px;
+                height: 25vw;
+                border-radius: 50%;
+                display: flex;
+                overflow: hidden;
+                max-width: 100px;
+                max-height: 100px;
+                img {
+                    object-fit: cover;
+                }
+            }
+        }
+    }
+}
+
+.dc-divider {
+    width: 100%;
+    height: 10px;
+    background-image: url(../assets/images/main-icon/line.png);
+    background-repeat: repeat-x;
+    background-size: auto 3px;
+    background-position: center;
+}
+
+.dc-banner {
+    padding: map-get($DCSizes, defaultPadding);
+    position: relative;
+    $desPosition: 36px;
+    .des {
+        position: absolute;
+        left: $desPosition;
+        right: $desPosition;
+        bottom: $desPosition;
+        color: map-get($DCColors, white);
+        font-size: .9em;
+    }
+}
+
+.error-message {
+    width: 100%;
+    padding: 10px map-get($DCSizes, defaultPadding);
+    text-align: center;
+    color: map-get($DCColors, gray);
+    &:empty {
+        display: none;
+    }
+}
+
+.dc-form {
+    padding: 15px map-get($DCSizes, paddingRight) 15px map-get($DCSizes, defaultPadding);
+    $inputHeight: 2.5em;
+    $divPadding: 6px;
+    background-color: #f9f9f9;
+    margin: 0 0 20px 0;
+    .validate-message {
+        margin-top: 5px;
+        display: block;
+        color: map-get($DCColors, gray);
+        text-align: center;
+    }
+    ion-datetime {
+        position: absolute;
+        top: $divPadding;
+        left: $divPadding;
+        height: $inputHeight;
+        width: 1.5*$inputHeight;
+        z-index: 10;
+        .datetime-text {
+            display: none;
+        }
+    }
+    .input-div {
+        display: flex;
+        position: relative;
+        padding: $divPadding;
+    }
+    .text-input {
+        width: 100%;
+        border: solid 1px map-get($DCColors, lightgray);
+        border-radius: 20px;
+        line-height: $inputHeight;
+        padding-left: 1*$inputHeight;
+        text-align: center;
+        color: map-get($DCColors, black);
+        margin: 0;
+        padding-right: 10px;
+        background-color: map-get($DCColors, white);
+    }
+    ion-textarea {
+        .text-input {
+            border-radius: 10px !important;
+            height: 3 * $inputHeight !important;
+        }
+    }
+    .icon {
+        position: absolute;
+        top: $divPadding;
+        left: $divPadding;
+        height: $inputHeight;
+        color: map-get($DCColors, primary);
+        width: 1.5*$inputHeight;
+        line-height: $inputHeight;
+        text-align: center;
+        z-index: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        img {
+            width: 0.5 * $inputHeight;
+            height: 0.5 * $inputHeight;
+            margin: auto;
+        }
+    }
+    .button-right {
+        position: absolute;
+        top: $divPadding;
+        right: $divPadding;
+        height: $inputHeight;
+        color: map-get($DCColors, primary);
+        width: 1.5*$inputHeight;
+        line-height: $inputHeight;
+        text-align: center;
+        z-index: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .ng-invalid:not(form) {
+        border-color: rgba(187, 42, 50, 0.69);
+        .text-input {
+            border-color: rgba(187, 42, 50, 0.69);
+        }
+    }
+}
+
+.food-item {
+    border-bottom: solid 1px map-get($DCColors, lightgray);
+    &.active {
+        .title {
+            color: map-get($DCColors, primary) !important;
+        }
+    }
+    &:last-child {
+        border-bottom: none;
+    }
+    padding: 16px;
+    display: flex;
+    .item-image {
+        width: 20%;
+        width: 20vw;
+        height: 65px;
+        height: 20vw;
+        border-radius: 50%;
+        display: inline-block;
+        overflow: hidden;
+        display: flex;
+        max-width: 100px;
+        max-height: 100px;
+        img {
+            object-fit: cover;
+        }
+    }
+    .item-des {
+        width: 55%;
+        padding-left: 15px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        .title {
+            display: block;
+            width: 100%;
+            padding: 5px 0;
+            font-weight: 500;
+            font-size: map-get($DCSizes, big);
+            color: map-get($DCColors, black);
+        }
+        .des {
+            display: block;
+            width: 100%;
+            color: map-get($DCColors, gray);
+        }
+        .time {
+            display: block;
+            width: 100%;
+            color: map-get($DCColors, green);
+        }
+    }
+    .item-order {
+        width: 25%;
+        text-align: center;
+        .dc-price {
+            font-size: map-get($DCSizes, big);
+        }
+        number-picker {
+            display: block;
+            width: 100%;
+            .number-picker {
+                height: 3.5em;
+                line-height: 3.5em;
+                width: 100%;
+                text-align: center;
+            }
+        }
+    }
+}
+
+.dc-fab {
+    $fabHeight: 2.6em;
+    width: $fabHeight;
+    height: $fabHeight;
+    bottom: 0.5 * $fabHeight;
+    right: 0.5 * $fabHeight;
+    border-radius: 50%;
+    font-size: 0.5*$fabHeight;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: map-get($DCColors, primary);
+    color: map-get($DCColors, white);
+}
+
+.dc-segment {
+    .segment-button {
+        color: map-get($map: $DCColors, $key: black);
+        font-weight: bold;
+        border-color: map-get($map: $DCColors, $key: lightgray);
+        text-transform: none;
+        &.activated,
+        &.segment-activated {
+            border-color: map-get($DCColors, primary);
+        }
+        &.segment-activated {
+            color: map-get($DCColors, primary);
+        }
+    }
+}

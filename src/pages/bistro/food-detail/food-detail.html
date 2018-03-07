@@ -1,0 +1,90 @@
+<ion-header>
+    <dc-header title="Detalhes" [showBackButton]="true" [showSearchBar]="false"></dc-header>
+</ion-header>
+<ion-content>
+    <div class="dc-content">
+        <div class="dc-section  ">
+            <div class="section-body">
+                <div class="main-image">
+                    <span class="button button-left" (click)="minusQuantily()">
+                        <i class="fa fa-minus" aria-hidden="true"></i>
+                    </span>
+                    <span class="button button-right" (click)="addQuantily()">
+                        <i class="fa fa-plus" aria-hidden="true"></i>
+                    </span>
+                    <img src="{{food.image}}" alt="image">
+                </div>
+                <div class="title-div">
+                    <span class="title">{{food.titleVie}}</span>
+                    <span class="quantily">(x{{food.quantily}})</span>
+                </div>
+                <div class="description-div">
+                    <span>{{food.description}}</span>
+                </div>
+                <div class="price-div">
+                    <span class="dc-price">{{food.currency}}{{food.price.toLocaleString()}}</span>
+                 
+                </div>
+                <div class="dc-divider"></div>
+            </div>
+        </div>
+        <div class="dc-section">
+            <div class="section-body">
+                <!-- <ion-row>
+                    <ion-col col-6>
+                        <span class="bold dc-black">Tempo de Preparo</span>
+                    </ion-col>
+                    <ion-col class="dc-green minutos" col-6 text-right>5</ion-col>
+                </ion-row> -->
+                <ion-row>
+                    <ion-col col-6>
+                        <span class="bold dc-black">Status</span>
+                    </ion-col>
+                    <ion-col class="dc-blue" col-6 text-right>Pronta Entrega</ion-col>
+                </ion-row>
+                <div class="dc-divider" style="padding-top: 10px;"></div>
+            </div>
+        </div>
+        <!-- <div class="dc-section">
+            <div class="section-body">
+                <span class="dc-black dc-black bold body-title">Itens Incluso</span>
+                <ion-row *ngFor="let parallelFood of food.parallelFoods">
+                    <ion-col col-1>
+                        <ion-checkbox class="checkbox-square checkbox-ios" [class.checkbox-md]="false" color="dcPrimary" (ionChange)="selectParallelFood(parallelFood, $event)" [checked]="parallelFood.quantily"></ion-checkbox>
+                    </ion-col>
+                    <ion-col text-left>
+                        <span>{{parallelFood.titleVie }} </span>
+                    </ion-col>
+                    <ion-col text-right>
+                        <span class="dc-price dc-bold dc-little-big">
+                            {{parallelFood.currency}} {{parallelFood.price.toLocaleString()}} 
+                        </span>
+                    </ion-col>
+                </ion-row>
+            </div>
+        </div> -->
+        <div class="dc-section">
+            <div class="section-body">
+                <span class="dc-black dc-black bold body-title">Observação</span>
+                <ion-textarea class="dc-textarea" placeholder="Escreva Sua Observação" [(ngModel)]="food.note">
+
+                </ion-textarea>
+                <div class="dc-divider"></div>
+            </div>
+        </div>
+        <div class="dc-section">
+            <div class="section-body">
+                <ion-row>
+                    <ion-col><span class="dc-black dc-black bold body-title">Promoções</span></ion-col>
+                    <ion-col text-right><span class="dc-gray">Não</span></ion-col>
+                </ion-row>
+            </div>
+        </div>
+    </div>
+</ion-content>
+<ion-footer class="dc-footer footer-ios" [class.footer-md]="false">
+    <div class="button-group">
+        <button class="dc-button-outline">Sugestões</button>
+        <button class="dc-button" (click)="addOrder()">Adicionar</button>
+    </div>
+</ion-footer>

@@ -1,0 +1,88 @@
+<ion-header>
+    <dc-header title="Reserva de Mesa" [showBackButton]="true" [showSearchBar]="false"></dc-header>
+</ion-header>
+
+<ion-content>
+    <div class="dc-content">
+        <div class="dc-banner">
+            <img src="assets/bistro/images/service/image_booking_2.png" alt="">
+            <div class="des">
+                <span>
+                    O restaurante aceita apenas 1 dia de antecedência
+                </span>
+                <br>
+                <span>
+                    Por favor, reserve pelo menos 1 hora antes da chegada para obter o melhor serviço
+              </span>
+            </div>
+        </div>
+        <form (ngSubmit)="continue()" [formGroup]="form">
+            <div class="dc-form">
+                <ion-row>
+                    <ion-col col-4>
+                        <div class="input-div">
+                            <span class="icon"> 
+                              <i class="fa fa-calendar" aria-hidden="true"></i>
+                          </span>
+                            <ion-input [(ngModel)]="date" formControlName="date" placeholder="Ngày "></ion-input>
+                            <ion-datetime displayFormat="DD/MM/YYYY" [min]="currentDateString" [max]="maxDateString" (ionChange)="dateChange($event)"></ion-datetime>
+                        </div>
+                    </ion-col>
+                    <ion-col col-4>
+                        <div class="input-div">
+                            <span class="icon">
+                              <i class="fa fa-clock-o" aria-hidden="true"></i>
+                          </span>
+                            <ion-input [(ngModel)]="time" formControlName="time" placeholder="Giờ"></ion-input>
+                            <ion-datetime displayFormat="HH:mm" (ionChange)="changeTime($event)"></ion-datetime>
+
+                        </div>
+                    </ion-col>
+                    <ion-col col-4>
+                        <div class="input-div">
+                            <span class="icon">
+                                <i class="fa fa-users" aria-hidden="true"></i>
+                          </span>
+                            <ion-input [(ngModel)]="person" type="tel" formControlName="person" placeholder="Số người"></ion-input>
+                        </div>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col col-12>
+                        <div class="input-div">
+                            <span class="icon"> 
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                        </span>
+                            <ion-input [(ngModel)]="name" formControlName="name" placeholder="Tên khách hàng"></ion-input>
+                        </div>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col col-12>
+                        <div class="input-div">
+                            <span class="icon"> 
+                            <i class="fa fa-phone" aria-hidden="true"></i>
+                        </span>
+                            <ion-input type="tel" [(ngModel)]="phone" formControlName="phone" placeholder="Número de telefone"></ion-input>
+                        </div>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col col-12>
+                        <div class="input-div">
+                            <span class="icon"> 
+                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                        </span>
+                            <ion-textarea [(ngModel)]="note" formControlName="note" placeholder="Yêu cầu khác"></ion-textarea>
+                        </div>
+                    </ion-col>
+                </ion-row>
+            </div>
+            <div class="error-message">{{errorMessage}}</div>
+            <div class="button-group">
+                <button ion-button type="button" class="dc-button-outline" (tap)="getBack()">Hủy</button>
+                <button ion-button class="dc-button">Gửi yêu cầu</button>
+            </div>
+        </form>
+    </div>
+</ion-content>

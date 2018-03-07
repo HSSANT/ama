@@ -1,0 +1,57 @@
+page-dc-loading {
+    ion-content {
+        background: map-get($map: $DCColors, $key: primary) !important;
+        // background: #691514 !important;
+    }
+    @keyframes spin {
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+    .img-loading {
+        position: absolute;
+        width: 100%;
+        height: auto;
+        top: 50%;
+        left: 0;
+        transform: translateX(-50%);
+    }
+    .dc-loading {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate3d(-50%, -70%, 0);
+        display: inline-block;
+        box-sizing: border-box;
+        width: 100px;
+        height: 110px;
+    }
+    .line {
+        position: absolute;
+        top: 40px;
+        left: 20px;
+        width: 60px;
+        height: 4px;
+        background: #FFF;
+        animation: spin 1.5s infinite ease;
+        &:nth-of-type(2) {
+            animation-delay: 0.1s;
+        }
+        &:nth-of-type(3) {
+            animation-delay: 0.2s;
+        }
+        &:nth-of-type(4) {
+            animation-delay: 0.3s;
+        }
+    }
+    .loading-text {
+        position: absolute;
+        bottom: 0;
+        color: #FFF;
+        display: block;
+        width: 100%;
+        text-align: center;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}

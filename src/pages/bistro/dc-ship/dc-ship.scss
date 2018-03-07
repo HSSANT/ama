@@ -1,0 +1,231 @@
+page-dc-ship {
+    .col {
+        padding: 0;
+    }
+    .row {
+        width: 100%;
+    }
+    .image-container {
+        position: relative;
+        width: 100%;
+        padding-top: 100%;
+        border-radius: 50%;
+        overflow: hidden;
+        display: flex;
+        img {
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: block;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+    .fixed-top {
+        background-color: #FFF;
+        position: absolute;
+        top: 45px;
+        left: 0;
+        width: 100%;
+        z-index: 10;
+    }
+    .header-md::after {
+        display: none;
+    }
+    .header-md {
+        border: solid 1px map-get($DCColors, primary);
+    }
+    .dc-step-group {
+        padding-top: 5px;
+        padding-bottom: 10px;
+        background-color: map-get($DCColors, primary);
+        .step {
+            color: rgba(255, 255, 255, 0.6);
+            &.active {
+                &.has-arrow::after {
+                    opacity: 1;
+                }
+                .step-title {
+                    color: map-get($DCColors, white);
+                }
+                .step-number {
+                    background-color: map-get($DCColors, white);
+                }
+            }
+            &.has-arrow::after {
+                opacity: .5;
+            }
+        }
+    }
+    .segment-md .segment-button {
+        font-size: 1.1em;
+        font-weight: 500;
+        color: map-get($DCColors, black);
+        text-transform: none;
+        border-bottom-width: 1px;
+        &.segment-activated {
+            border-bottom-width: 2px;
+            color: map-get($DCColors, primary);
+            border-bottom-color: map-get($DCColors, primary);
+        }
+    }
+    .search-bar {
+        background-color: #f9f9f9;
+        .searchbar {
+            background: none !important;
+            padding: 0 map-get($DCSizes, defaultPadding);
+            .searchbar-input {
+                border-radius: 20px;
+                border: solid 1px map-get($DCColors, lightgray);
+                font-size: 1.1em;
+            }
+        }
+    }
+    .food-item {
+        .col {
+            padding: 0;
+        }
+        .row {
+            width: 100%;
+        }
+        .image-container {
+            position: relative;
+            width: 100%;
+            padding-top: 100%;
+            border-radius: 50%;
+            overflow: hidden;
+            display: flex;
+            z-index: 2;
+            img {
+                width: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                display: block;
+                height: 100%;
+                object-fit: cover;
+                z-index: 1;
+            }
+        }
+        .des-item {
+            font-size: map-get($DCSizes, littleBig);
+            padding: 0 10px 0 10px;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            justify-content: space-evenly;
+            .title {
+                color: map-get($DCColors, black)
+            }
+        }
+        .button-item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .order-button {
+                padding: 3px 0;
+                width: 100%;
+            }
+        }
+    }
+    .popular {
+        .dc-price {
+            display: block;
+            width: 100%;
+        }
+    }
+    $buttonSize :1.5em;
+    .button-item {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .button-remove {
+            background-color: map-get($DCColors, primary);
+            color: map-get($DCColors, white);
+            border-radius: 20px;
+            width: $buttonSize;
+            height: $buttonSize;
+            display: block;
+            text-align: center;
+            line-height: $buttonSize;
+        }
+    }
+    .image-item,
+    .item-order {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .number-picker-button {
+        width: $buttonSize;
+        height: $buttonSize;
+        line-height: $buttonSize;
+    }
+    .footer {
+        font-size: .8em;
+        padding: 0 10px 10px map-get($DCSizes, defaultPadding);
+        background-color: map-get($DCColors, white);
+        z-index: 10;
+        .footer-text {
+            margin-top: 10px;
+            font-weight: 500;
+            font-size: 1.1em;
+        }
+        .dc-price {
+            float: right;
+        }
+        .button-group {
+            width: 100%;
+            padding: map-get($DCSizes, defaultPadding);
+            text-align: center;
+            .footer-button {
+                padding: 6px 20px;
+                margin: 0 5px;
+            }
+        }
+    }
+    .selected {
+        .dc-section {
+            padding-bottom: 100px;
+        }
+    }
+    .menu {
+        .dc-section {
+            position: relative;
+            border-bottom: none;
+            &.collapsed {
+                height: 45px;
+            }
+            .food-item {
+                padding: 10px map-get($DCSizes, defaultPadding);
+                border: none;
+            }
+            .section-body {
+                padding: 0;
+                margin-top: 0;
+                padding-top: 5px;
+            }
+            .button-right {
+                right: 0;
+            }
+            .title {
+                color: map-get($DCColors, black);
+            }
+            &::after {
+                display: block;
+                height: 2px;
+                border-bottom: dotted 2px map-get($DCColors, primary);
+                position: absolute;
+                bottom: 0;
+                left: map-get($DCSizes, defaultPadding);
+                right: map-get($DCSizes, paddingRight);
+                content: " ";
+            }
+        }
+        .section-padding {
+            padding: 0 map-get($DCSizes, defaultPadding);
+        }
+    }
+}

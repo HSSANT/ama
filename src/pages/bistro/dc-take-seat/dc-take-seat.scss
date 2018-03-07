@@ -1,0 +1,81 @@
+page-dc-take-seat {
+    .row,
+    .col {
+        padding: 0;
+    }
+    .place-div {
+        img {
+            display: block;
+            width: 30%;
+            margin: 7em auto 2em auto;
+        }
+        .button-group {
+            width: 100%;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            span {
+                color: map-get($DCColors, gray);
+                margin-bottom: 15px;
+            }
+        }
+    }
+    .seat-item {
+        padding: map-get($DCSizes, defaultPadding);
+        border-bottom: solid 1px map-get($DCColors, lightgray);
+        .col-img {
+            display: flex;
+            font-weight: bold;
+            color: map-get($DCColors, primary);
+            flex-direction: column;
+            justify-content: flex-start;
+            padding-top: 6px;
+            align-items: center;
+            font-size: map-get($DCSizes, big);
+            img {
+                position: absolute;
+                z-index: 1;
+                width: 100%;
+                max-height: 100%;
+                top: 0;
+                left: 0;
+            }
+            span {
+                z-index: 2;
+                margin: 2px;
+            }
+        }
+        .col-text {
+            padding-left: 10px;
+            color: map-get($DCColors, gray);
+            .title {
+                color: map-get($DCColors, black);
+                font-size: map-get($DCSizes, big);
+                width: 100%;
+                display: block;
+                font-weight: 500;
+                margin-bottom: 5px;
+            }
+            .icon {
+                width: 1.2em;
+                height: 1.2em;
+                display: inline-block;
+                vertical-align: baseline;
+                color: map-get($DCColors, primary);
+                font-size: 1.2em;
+            }
+            .time-div {
+                width: 100%;
+                display: table;
+                .time {
+                    float: left;
+                }
+                .person {
+                    float: right;
+                }
+            }
+        }
+    }
+}
