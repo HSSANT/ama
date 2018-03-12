@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { AppControllerProvider } from '../../../providers/bistro/app-controller/app-controller';
-import { BookedSeat } from '../../../providers/bistro/classes/service';
+import { Store } from '../../../providers/bistro/classes/store';
 
 @IonicPage()
 @Component({
@@ -9,7 +9,7 @@ import { BookedSeat } from '../../../providers/bistro/classes/service';
   templateUrl: 'near-store.html',
 })
 export class NearStorePage {
-  bookedSeat: Array<BookedSeat> = [];
+  stores: Array<Store>=[];
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -18,23 +18,26 @@ export class NearStorePage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad DcTakeSeatPage');
+    console.log('ionViewDidLoad NearStorePage');
   }
 
   ionViewDidEnter() {
-    this.loadBookedSeat();
-    console.log("bookedseat", this.bookedSeat);
+    this.loadStores();
+    console.log("nearstore", this.stores);
   }
 
-  bookSeat() {
-    let modal = this.modalCtrl.create("TakeSeatModalPage");
+  addStore() {
+    let modal = this.modalCtrl.create("StoreAdminPage");
     modal.present();
     modal.onDidDismiss(() => {
-      this.loadBookedSeat();
     })
   }
 
-  loadBookedSeat() {
-    this.bookedSeat = this.appCtroller.getServiceProvider().getBookedSeat();
+  loadStores() {
+    this.stores = this.appCtroller.getStoreService().getAllStores();
   }
+  backToFindPlace(){
+    this.navCtrl.push("DcTaxiPage");
+  }
+
 }

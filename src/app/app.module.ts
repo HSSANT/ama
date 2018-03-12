@@ -20,12 +20,17 @@ import { AddressServiceProvider } from '../providers/bistro/address-service/addr
 import { DiscountServiceProvider } from '../providers/bistro/discount-service/discount-service';
 import { BistroHttpServiceProvider } from '../providers/bistro/bistro-http-service/bistro-http-service';
 import { StoreServiceProvider } from '../providers/bistro/store-service/store-service';
+import { FIREBASE_CREDENTIALS } from './firebase.credentials.config';
+import { Camera } from '@ionic-native/camera';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabase } from 'angularfire2/database';
 @NgModule({
   declarations: [
     MyApp,
   ],
   imports: [
     BrowserModule,
+    AngularFireModule.initializeApp(FIREBASE_CREDENTIALS),
     HttpModule,
     FormsModule,
     IonicModule.forRoot(MyApp, {
@@ -38,8 +43,10 @@ import { StoreServiceProvider } from '../providers/bistro/store-service/store-se
     MyApp,
   ],
   providers: [
+    AngularFireDatabase,
     StatusBar,
     SplashScreen,
+    Camera,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     FoodServiceProvider,
     HttpService,

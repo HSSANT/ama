@@ -3,6 +3,8 @@ page-near-store {
     .col {
         padding: 0;
     }
+
+
     .place-div {
         img {
             display: block;
@@ -65,6 +67,9 @@ page-near-store {
                 vertical-align: baseline;
                 color: map-get($DCColors, primary);
                 font-size: 1.2em;
+                .light{
+                    color:gold;
+                }
             }
             .time-div {
                 width: 100%;
@@ -74,6 +79,13 @@ page-near-store {
                 }
                 .person {
                     float: right;
+                }
+                .changePlace{
+                    float: right;
+                    color:red;
+                    font-size: map-get($DCSizes, big);
+                    font-weight: 500;
+
                 }
             }
         }

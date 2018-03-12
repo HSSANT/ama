@@ -1,0 +1,45 @@
+page-store-admin {
+    .col {
+        padding: 0;
+    }
+    .row {
+        width: 100%;
+    }
+    .fixed-top {
+        background-color: #FFF;
+        position: absolute;
+        top: 45px;
+        left: 0;
+        width: 100%;
+        z-index: 10;
+    }
+    .button-group {
+        width: 100%;
+        text-align: center;
+        .dc-button {
+            padding: 6px 26px !important;
+            margin: 5px;
+            font-size: 1em !important;
+            height: auto !important;
+        }
+        .dc-button-outline {
+            padding: 5px 26px !important;
+            margin: 5px;
+            font-size: 1em !important;
+            height: auto !important;
+        }
+    }
+    .banner {
+        padding: map-get($DCSizes, defaultPadding);
+        position: relative;
+        $desPosition: 36px;
+        .des {
+            position: absolute;
+            left: $desPosition;
+            right: $desPosition;
+            bottom: $desPosition;
+            color: map-get($DCColors, white);
+            font-size: .9em;
+        }
+    }
+}

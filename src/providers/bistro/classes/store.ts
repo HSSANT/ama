@@ -2,14 +2,18 @@ import { Utils } from "../../app-utils";
 
 export class Store {
     id: number;
-    titleVie: string;
-    titleEng: string;
+    name: string;
     keyword: string;
-    constructor(id: number, titleVie: string, titleEng: string) {
+    urlLogo:string;
+    startTime: Date;
+    endTime: Date;
+    
+    constructor(id: number, name: string) {
         this.id = id;
-        this.titleVie = titleEng;
-        this.titleEng = titleEng;
-        let shortTitle = titleEng.toLowerCase().split(' ').map(elm => { return elm.charAt(0) }).join('');
-        this.keyword = titleEng.toLowerCase() + "._." + Utils.bodauTiengViet(titleVie.toLowerCase() + "._." + shortTitle);
+        this.name = name;
+        let shortTitle = name.toLowerCase().split(' ').map(elm => { return elm.charAt(0) }).join('');
+        this.keyword = name.toLowerCase() + "._." + "._." + shortTitle;
+        this.urlLogo = 'assets/bistro/images/store/graydefault.png';
+        
     }
 }

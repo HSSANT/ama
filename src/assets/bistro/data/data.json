@@ -3,108 +3,87 @@
     "version": "1.0",
     "stores":[{
         "id": 1,
-        "vie": "Extra",
-        "en": "Extra"
+        "name": "Extra"
     },
     {
         "id": 2,
-        "vie": "Mercado Davó",
-        "en": "Mercado Davó"
+        "name": "Mercado Davó"
     },
     {
         "id": 3,
-        "vie": "Mercado Sonda",
-        "en": "Mercado Sonda"
+        "name": "Mercado Sonda"
     },
     {
         "id": 4,
-        "vie": "Mercado Hyper",
-        "en": "Mercado Hyper"
+        "name": "Mercado Hyper"
     },
     {
         "id": 4,
-        "vie": "Mercado X",
-        "en": "Mercado X"
+        "name": "Mercado X"
     },
     {
         "id": 5,
-        "vie": "Pop Store ",
-        "en": "Pop Store "
+        "name": "Pop Store "
     },
     {
         "id": 6,
-        "vie": "WallMart ",
-        "en": "WallMart "
+        "name": "WallMart "
     },
     {
         "id": 7,
-        "vie": "Frios e Cia ",
-        "en": "WallMart "
+        "name": "Frios e Cia "
     },
     {
         "id": 7,
-        "vie": "Preço e Cia ",
-        "en": "Preço e cia "
+        "name": "Preço e Cia "
     },
     {
         "id": 8,
-        "vie": "Preço e Cia ",
-        "en": "Preço e cia "
+        "name": "Preço e Cia "
     },
     {
         "id": 9,
-        "vie": "HortFruit da Bella ",
-        "en": "HortFruit da Bella "
+        "name": "HortFruit da Bella "
     },
     {
         "id": 10,
-        "vie": "Eclipse Mercado",
-        "en": "Eclipse Mercado"
+        "name": "Eclipse Mercado"
     },
     {
         "id": 11,
-        "vie": "Dia ",
-        "en": "Dia"
+        "name": "Dia "
     },
     {
         "id": 12,
-        "vie": "New Moments ",
-        "en": "New Moments"
+        "name": "New Moments "
     },
     {
         "id": 13,
-        "vie": "Fazenda dos Frios ",
-        "en": "Fazenda dos Frios"
+        "name": "Fazenda dos Frios "
     },
     {
         "id": 14,
-        "vie": "Frituras Grande Sabor ",
-        "en": "Frituras Grande Sabor"
+        "name": "Frituras Grande Sabor "
     },
     {
         "id": 15,
-        "vie": "Sempre Barato ",
-        "en": "Sempre Barato"
+        "name": "Sempre Barato "
     },
     {
         "id": 16,
-        "vie": "Sempre Caro ",
-        "en": "Sempre Caro"
+        "name": "Sempre Caro "
     },
     {
         "id": 17,
-        "vie": "MartKet ",
-        "en": "MartKet"
+        "name": "MartKet "
     },
     {
         "id": 18,
-        "vie": "Mar de Preços ",
-        "en": "Mar de Preços"
+        "name": "Mar de Preços "
     },
     {
         "id": 19,
-        "vie": "Rio Market ",
-        "en": "Rio Market"
+        "name": "Rio Market "
     }
 
 

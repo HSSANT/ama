@@ -41,7 +41,7 @@ export class DcTaxiPage {
     if (this.currentAddress) {
      
       this.appController.getAddressService().addRecentAddress(this.currentAddress);
-      this.appController.setRootPage("NearStorePage")
+      this.navCtrl.push("NearStorePage")
     } else {
       this.errorMessage = "Selecione seu Local";
     }
@@ -62,6 +62,7 @@ export class DcTaxiPage {
   pickPlace(event) {
     this.navCtrl.push("DcFindPlacePage");
   }
+  
 
 
 
