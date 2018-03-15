@@ -1,5 +1,5 @@
 <ion-header>
-    <dc-header title="Reserva de Mesa" [showBackButton]="true" [showSearchBar]="false"></dc-header>
+    <dc-header title="Reserva de Mesa" [showBackButton]="true" [showSearchBar]="false" [showOrder]="false"></dc-header>
 </ion-header>
 
 <ion-content>
@@ -8,42 +8,47 @@
             <img src="assets/bistro/images/service/image_booking_2.png" alt="">
             <div class="des">
                 <span>
-                    O restaurante aceita apenas 1 dia de antecedência
+                    O IBooklet pede 1 dia de antecedência para cadastrar as novas lojas
                 </span>
                 <br>
                 <span>
-                    Por favor, reserve pelo menos 1 hora antes da chegada para obter o melhor serviço
+                    Por favor, confirme com atenção as informações recebidas 
               </span>
             </div>
         </div>
+
+    
+
         <form (ngSubmit)="continue()" [formGroup]="form">
             <div class="dc-form">
                 <ion-row>
-                    <!-- <ion-col col-4>
-                        <div class="input-div">
-                            <span class="icon"> 
-                              <i class="fa fa-calendar" aria-hidden="true"></i>
-                          </span>
-                            <ion-input [(ngModel)]="date" formControlName="date" placeholder="Dia "></ion-input>
-                            <ion-datetime displayFormat="DD/MM/YYYY" [min]="currentDateString" [max]="maxDateString" (ionChange)="dateChange($event)"></ion-datetime>
+                    <ion-col col-12>
+                        <div class="input-div" (click)="pickPlace($event)">
+                            <span class="icon">
+                                <i class="fa fa-map-marker" aria-hidden="true"></i>
+                            </span>
+                            <ion-input  (tab)="continueAddress()" [(ngModel)]="this.txtAddress" formControlName="address"  [ngClass]="{'dc-gray': !currentAddress, 'dc-balack': currentAddress}"></ion-input>
                         </div>
-                    </ion-col> -->
-                    <ion-col col-4>
+                    </ion-col>
+                    </ion-row>
+                 
+                    <ion-row>
+                    <ion-col col-6>
                         <div class="input-div">
                             <span class="icon">
                               <i class="fa fa-clock-o" aria-hidden="true"></i>
                           </span>
-                            <ion-input [(ngModel)]="time" formControlName="time" placeholder="Abertura"></ion-input>
-                            <ion-datetime displayFormat="HH:mm" (ionChange)="changeTime($event)"></ion-datetime>
+                            <ion-input [(ngModel)]="startTime" formControlName="startTime" placeholder="Abertura"></ion-input>
+                            <ion-datetime displayFormat="HH:mm" (ionChange)="changeTime($event,true)"></ion-datetime>
 
                         </div>
                     </ion-col>
-                    <ion-col col-4>
+                    <ion-col col-6>
                             <div class="input-div">
                                     <span class="icon">
                                       <i class="fa fa-clock-o" aria-hidden="true"></i>
                                   </span>
-                                    <ion-input [(ngModel)]="time" formControlName="time" placeholder="Fechamento"></ion-input>
+                                    <ion-input [(ngModel)]="endTime" formControlName="endTime" placeholder="Fechamento"></ion-input>
                                     <ion-datetime displayFormat="HH:mm" (ionChange)="changeTime($event)"></ion-datetime>
         
                                 </div>
@@ -71,19 +76,19 @@
                 </ion-row>
                 <ion-row>
                     <ion-col col-12>
-                        <div class="input-div">
+                        <div class="input-div" (click)="uploadFoto($event)">
                             <span class="icon"> 
-                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                            <i class="fa fa-photo" aria-hidden="true"></i>
                         </span>
-                            <ion-textarea [(ngModel)]="note" formControlName="note" placeholder="Descrição"></ion-textarea>
+                            <ion-input [(ngModel)]="url" (tab)="uploadFoto($event)" formControlName="url" placeholder="Logo"></ion-input>
                         </div>
                     </ion-col>
                 </ion-row>
             </div>
             <div class="error-message">{{errorMessage}}</div>
             <div class="button-group">
-                <button ion-button type="button" class="dc-button-outline" (tap)="getBack()">Hủy</button>
-                <button ion-button class="dc-button">Gửi yêu cầu</button>
+                <button ion-button type="button" class="dc-button-outline" (tap)="getBack()">Voltar</button>
+                <button ion-button class="dc-button">Gravar</button>
             </div>
         </form>
     </div>

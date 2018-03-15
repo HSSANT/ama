@@ -34,7 +34,7 @@ export class NearStorePage {
   }
 
   loadStores() {
-    this.stores = this.appCtroller.getStoreService().getAllStores();
+    this.stores = this.appCtroller.getStoreService().getStores();
   }
   backToFindPlace(){
     this.navCtrl.push("DcTaxiPage");

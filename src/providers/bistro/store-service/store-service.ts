@@ -20,14 +20,14 @@ export class StoreServiceProvider {
   stores: Array<Store> = [];
   dataVersion: number = 0;
   dataChangeHandler: any;
+  opt:Store = new Store();
   constructor(public http: Http,
     private db: AngularFireDatabase,
     private camera: Camera
   ) {
     this.myPhotosRef = firebase.storage().ref('/Photos/');
-    this.items = db.list('/stores').valueChanges();
-    db.list('/stores').push("123");
- 
+   
+   
   }
 
 //CAMERA METHODS
@@ -74,21 +74,66 @@ export class StoreServiceProvider {
       this.resetData();
       this.dataVersion = version;
       for (let store of data) {
-        let temStore = new Store(store["id"], store["name"]);
+       this.opt.id = store["id"];
+       this.opt.name = store["name"]
+        let temStore = new Store(this.opt);
         this.stores.push(temStore);
       }
     }
     this.broadcastChange(this.stores);
   }
 
-  getList() {
-    this.db.list('/stores', ref => ref.orderByChild('name'));
+ //Metodos de Consulta Firebase
+  getStoresPromisse(){
+    let stores = new Array<Store>();
+    let data = [];
+    return new Promise((resolve,reject)=>{
+      firebase.database().ref("/stores").once("value",(snapshot)=>{
+        data = snapshot.val();
+        for (const key in data) {
+          stores.push(new Store(data[key],));
+        } 
+        resolve(stores);
+      }).catch((err)=>{
+        resolve(false);
+      })
+    });
   }
 
-  getSingleItem(id) {
-    
+  getStores():Array<Store> {
+    this.getStoresPromisse().then((res: any) => {
+      if (res) {
+        this.stores = res;
+      } else {
+        console.log("getStores: lista de loja vazia");
+      }
+    }).catch((err) => { })
+    return this.stores
   }
-  
+
+
+  //Metodos de insercao Firebase
+
+  addStorePromise(store : Store) {
+    return new Promise((resolve,reject)=>{
+      firebase.database().ref("/stores").push(store).then(()=>{
+        resolve({sucess: true});
+      })
+    });
+  }
+
+  addStore(store:Store):Boolean{
+    let returnCode = false
+    this.addStorePromise(store).then((res: any)=>{
+    if(res.sucess){
+      returnCode = true
+    }else{
+      returnCode = false
+    }
+  });
+    return returnCode;
+  }
+
 
 
   onDataChange(handler) {
