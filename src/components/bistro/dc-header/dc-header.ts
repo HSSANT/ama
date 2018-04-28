@@ -12,6 +12,7 @@ export class DcHeaderComponent {
   searchKeyword = "";
   user: User;
   backButtons = ["assets/bistro/images/main-icon/btn_back.png"];
+  logo = ["assets/bistro/images/main-icon/logo.png"];
   @Input()
   placholder = "Procure alimentos, serviços, promoções";
   @Input()

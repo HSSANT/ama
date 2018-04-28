@@ -7,6 +7,8 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 import firebase from 'firebase';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs';
+import { Complaint } from '../classes/complaint';
+import { AlertController } from 'ionic-angular';
 
 
 @Injectable()
@@ -15,32 +17,106 @@ export class StoreServiceProvider {
   public myPhotosRef: any;
   public myPhoto: any;
   public myPhotoURL: any;
+  public images:string[];
   private imageSrc: string;
   items: Observable<any[]>;
   stores: Array<Store> = [];
+  complaint: Array<Complaint> = [];
   dataVersion: number = 0;
   dataChangeHandler: any;
   opt:Store = new Store();
   constructor(public http: Http,
     private db: AngularFireDatabase,
-    private camera: Camera
+    public alertCtrl:AlertController,
+    private camera: Camera,
   ) {
     this.myPhotosRef = firebase.storage().ref('/Photos/');
-   
+    this.myPhotoURL = "";
    
   }
+
+
+
+
+//   
 
 //CAMERA METHODS
 
-  private uploadPhoto(): void {
+public selectPhoto()  {
+  return new Promise((resolve,reject)=>{
+    let alert = this.alertCtrl.create();
+    alert.setTitle('Selecione Camera ou Galeria');
+
+    alert.addInput({
+      type: 'radio',
+      label: 'Camera',
+      value: 'camera',
+      checked: false
+    });
+    alert.addInput({
+      type: 'radio',
+      label: 'Galeria',
+      value: 'galery',
+      checked: true
+    });
+
+    alert.addButton({
+      text: 'Ok',
+      handler: data => {
+        console.log(data);
+ 
+       if(data == 'galery'){
+          this.takeGalery().then( data=>{
+            resolve(this.myPhotoURL);
+          });
+        }
+        else{
+          this.takeCamera().then( data=>{
+            resolve(this.myPhotoURL);
+          });
+        }
+
+       
+     
+      }
+    })
+    alert.addButton({
+      text: 'cancel',
+      handler: data => {
+       alert.dismiss();
+      }
+    });
+    
+    alert.present();
+
+      
+    });
+  }
+      
+      
+
+
+    
+
+
+
+  private uploadPhoto() {
+    return new Promise((resolve,reject)=>{
     this.myPhotosRef.child(this.generateUUID()).child('myPhoto.png')
       .putString(this.myPhoto, 'base64', { contentType: 'image/png' })
       .then((savedPicture) => {
-        this.myPhotoURL = savedPicture.downloadURL;
+      
+         this.myPhotoURL = savedPicture.downloadURL;
+         console.log(this.myPhotoURL);
+         resolve(this.myPhotoURL);
+      }, error => {
+        console.log("ERROR -> " + JSON.stringify(error));
       });
-  }
+  })
+}
 
-  selectPhoto(): void {
+  takeGalery() {
+    return new Promise((resolve,reject)=>{
     this.camera.getPicture({
       sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
       destinationType: this.camera.DestinationType.DATA_URL,
@@ -48,10 +124,32 @@ export class StoreServiceProvider {
       encodingType: this.camera.EncodingType.PNG,
     }).then(imageData => {
       this.myPhoto = imageData;
-      this.uploadPhoto();
+      this.uploadPhoto().then(data =>{
+        resolve(this.myPhotoURL);
+      });
+     
     }, error => {
       console.log("ERROR -> " + JSON.stringify(error));
-    });
+    })});
+  }
+
+  takeCamera(){
+    return new Promise((resolve,reject)=>{
+    this.camera.getPicture({
+      quality: 100,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE
+    }).then((imageData) => {
+      // imageData is a base64 encoded string
+      this.myPhoto = imageData;
+      this.uploadPhoto().then(data =>{
+        resolve(this.myPhotoURL);
+      });
+     
+    }, error => {
+      console.log("ERROR -> " + JSON.stringify(error));
+    })});
   }
   private generateUUID(): any {
     var d = new Date().getTime();
@@ -88,7 +186,7 @@ export class StoreServiceProvider {
     let stores = new Array<Store>();
     let data = [];
     return new Promise((resolve,reject)=>{
-      firebase.database().ref("/stores").once("value",(snapshot)=>{
+      firebase.database().ref("/vazamento").once("value",(snapshot)=>{
         data = snapshot.val();
         for (const key in data) {
           stores.push(new Store(data[key],));
@@ -112,27 +210,67 @@ export class StoreServiceProvider {
   }
 
 
+
+ //Metodos de Consulta Firebase
+ getComplaintPromisse(){
+  let complaint = new Array<Complaint>();
+  let data = [];
+  return new Promise((resolve,reject)=>{
+    firebase.database().ref("/vazamento").once("value",(snapshot)=>{
+      let head = snapshot.val();
+       data = head.value;
+      for (const key in data) {
+        complaint.push((data[key]));
+ 
+      } 
+      resolve(complaint);
+    }).catch((err)=>{
+      resolve(false);
+    })
+  });
+}
+
+
+getAllCompliants(){
+  return new Promise((resolve,reject)=>{
+    firebase.database().ref('/vazamento').once('value',(snapshot)=>{
+      if(snapshot){
+        let data = snapshot.val();
+        let temp = [];
+        for (const key in data) {
+          temp.push(new Complaint(data[key]));              
+        }
+        resolve(temp);
+      }
+    }).catch((err)=>{
+      alert(err);
+      resolve(0);
+    })
+  })
+}
+
+getComplaint():Array<Complaint> {
+  this.getComplaintPromisse().then((res: any) => {
+    if (res) {
+      this.complaint = res;
+    } else {
+      console.log("getFirebase: lista  vazia");
+    }
+  }).catch((err) => { })
+  return this.complaint
+}
+
+
   //Metodos de insercao Firebase
 
-  addStorePromise(store : Store) {
+  addFireBaseData(data : any,table:string) {
     return new Promise((resolve,reject)=>{
-      firebase.database().ref("/stores").push(store).then(()=>{
+      firebase.database().ref("/"+ table).push(data).then(()=>{
         resolve({sucess: true});
       })
     });
   }
 
-  addStore(store:Store):Boolean{
-    let returnCode = false
-    this.addStorePromise(store).then((res: any)=>{
-    if(res.sucess){
-      returnCode = true
-    }else{
-      returnCode = false
-    }
-  });
-    return returnCode;
-  }
 
 
 

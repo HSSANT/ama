@@ -1,0 +1,50 @@
+
+ <!-- <ion-header>
+        <dc-header title="Ocorrências" [showBackButton]="true" [showSearchBar]="false" [showOrder]="false"></dc-header>
+</ion-header>
+<ion-content>
+
+    <ion-card *ngFor="let complaint of complaints">
+      <img src="{{complaint.images[0].url}}"/>
+        <ion-card-content>
+          <ion-card-title>
+           aberto por:{{complaint.name}}
+            </ion-card-title>
+          <p>
+            area:{{complaint.area}}
+            descrição:{{complaint.note}}
+          </p>
+       </ion-card-content>
+      </ion-card>
+</ion-content> -->
+
+<ion-header>
+  <dc-header title="Guia" [showBackButton]="true" [showSearchBar]="false" [showOrder]="false"></dc-header>
+</ion-header>
+<ion-slides pager initialSlide=0>
+    <ion-slide padding>
+      <img src="assets/bistro/images/main-icon/logo.png" class="slider-image" />
+      <h2>Obrigado!</h2>
+      <p>Primeiramente queremos agradecer seu interesse em baixar este aplicativo.</p>
+      <p><strong>Você tem um papel primordial</strong> neste projeto que é proteger nosso maior bem, a água!</p>
+  
+      <p>Os <strong>Guardiões da Água</strong> acredita que você pode fazer mais para poupar nossos recursos naturais que estão cada vez mais escassos
+        e fiscalizar que todos o façam.</p>
+    </ion-slide>
+    <ion-slide padding>
+      <h2>Como funciona?</h2>
+        <p><span>1</span>Você faz a denúncia de vazamentos e desperdícios informando seu nome, local, dia, hora, telefone, area e a descrição da irregularidade.</p>
+        <p><span>2</span> pra saber o andamento da sua e das demais dênuncia veja no menu em <strong>Ocorrências</strong> </p>
+        <p><span>3</span>Esta ocorrência será enviada ao responsável da area ou a Sabesp que irá atuar no caso </p>
+    </ion-slide>
+    <ion-slide padding>
+      <h2>Gostou?</h2>
+      <h3>Precisamos de ajuda</h3>
+      <p>Este é um projeto sem fins lucrativos, o único intuito é com a ajuda de todos salvar a nossa água</p>
+  
+      <p>Para sugestões ou dúvidas, mande um e-mail para <strong>janaina.ambiental@yahoo.com</strong></p>
+  
+      <p><strong>Importante:</strong> O uso incorreto vai acarretar no bloqueio do aplicativo no seu aparelho.
+        Dispoível apenas para android e posteriormente para IOS. Obrigado!</p>
+    </ion-slide>
+  </ion-slides>

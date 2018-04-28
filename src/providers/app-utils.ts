@@ -5,6 +5,10 @@ export class Utils {
     public static reg_username = /^[A-Za-z0-9_-]{6,20}$/;
     public static reg_email = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   
+      public static  monthNames = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+      "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+    ];
+
     private static mTopZindex: number = 100;
   
     public static getTopZIndex() {
@@ -104,6 +108,29 @@ export class Utils {
       return date.getTime() + days * 86400000;
     }
   
+    public static getTimeDiff(date: Date) {
+      var past= date;
+      var now= new Date();
+       
+     
+    
+        //Get 1 day in milliseconds
+        var one_day=1000*60*60*24;
+    
+        // Convert both dates to milliseconds
+        var date1_ms = past.getTime();
+        console.log(date1_ms);
+        var date2_ms = now.getTime();
+    
+        // Calculate the difference in milliseconds
+        var difference_ms = date2_ms - date1_ms;
+          
+        // Convert back to days and return
+        return Math.round(difference_ms/one_day); 
+      }
+      
+
+
     public static calculateDistance(lat1, lng1, lat2, lng2) {
       let dLat = Utils.degreeToRadian(lat2 - lat1);
       let dLng = Utils.degreeToRadian(lng2 - lng1);

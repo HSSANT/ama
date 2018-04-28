@@ -11,7 +11,7 @@ export class UserServiceProvider {
   }
 
   login(phone, password) {
-    this.user.setName("Daniel");
+    this.user.setName("Janaina");
     this.user.setPassword(password);
     this.user.setPhone(phone);
     this.user.setLoginStatus(true);

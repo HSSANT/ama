@@ -1,5 +1,5 @@
 <ion-header>
-    <dc-header title="Escolha o Local" [showSearchBar]="false" [showBackButton]="true"></dc-header>
+    <dc-header title="Escolha o Local" [showSearchBar]="false" [showOrder]="false" [showBackButton]="true"></dc-header>
 </ion-header>
 <ion-content class="has-map" id="dc-find-place-content">
     <div id="dc-find-place-map"></div>
@@ -9,10 +9,10 @@
     <div class="dc-content">
         <ion-segment [(ngModel)]="tab" (ionChange)="tabChange()" class="dc-segment segment-md" [class.segment-ios]="false">
             <ion-segment-button value="google">
-                Google
+                Busque Pelo Nome
             </ion-segment-button>
             <ion-segment-button value="map">
-                Mapa
+                Busque Pelo Gps
             </ion-segment-button>
         </ion-segment>
         <div class="search-bar" [class.over-map]="tab=='map'">
@@ -21,7 +21,7 @@
                 <span class="icon icon-left">
                     <img src="assets/bistro/images/service/icon_location.png" alt="">
                 </span>
-                <span class="address">{{mapAddress?mapAddress.name:"Destino"}}</span>
+                <span class="address">{{mapAddress?mapAddress.name:"Local do Vazamento"}}</span>
                 <span class="icon icon-right button-non-favourite" (click)="mapFavouriteClick(mapAddress,mapFavourite)" #mapFavourite>
                     <img class="non-favourite" src="assets/bistro/images/service/btn_favourite_1.png" alt="">
                     <img class="favourite" src="assets/bistro/images/service/btn_favourite_2.png" alt="">

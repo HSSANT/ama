@@ -1,4 +1,61 @@
 page-store-admin {
+
+
+.dc-card{
+     $inputHeight: 2.0em;
+   
+        text-align: center;
+     
+     
+       padding-left: 7em;
+     
+    
+        margin-top: 1em;
+       
+       
+        background-color: map-get($DCColors, #f9f9f9);
+       
+          .img{
+              width: 50%;
+              background-color: white;
+      
+          }
+
+}
+
+
+
+    ion-slides {
+        $inputHeight: 3.5em;
+        text-align: center;
+        width: 100%;
+        border: solid 1px map-get($DCColors, lightgray);
+        border-radius: 20px;
+        line-height: $inputHeight;
+    
+        text-align: center;
+        color: map-get($DCColors, black);
+        margin: 0;
+       
+        padding-left:2em;
+        background-color: map-get($DCColors, white);
+       ion-slide{
+          .img{
+              width: 23%;
+              margin: 2em;
+          }
+    
+           
+       }
+    }
+    ion-img {
+        object-fit: resize;
+        width: auto !important;
+        border: 0;
+        padding: 0;
+        background-color: grey;
+    }
+
     .col {
         padding: 0;
     }

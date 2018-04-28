@@ -1,0 +1,72 @@
+
+ <!-- <ion-header>
+        <dc-header title="Ocorrências" [showBackButton]="true" [showSearchBar]="false" [showOrder]="false"></dc-header>
+</ion-header>
+<ion-content>
+
+    <ion-card *ngFor="let complaint of complaints">
+      <img src="{{complaint.images[0].url}}"/>
+        <ion-card-content>
+          <ion-card-title>
+           aberto por:{{complaint.name}}
+            </ion-card-title>
+          <p>
+            area:{{complaint.area}}
+            descrição:{{complaint.note}}
+          </p>
+       </ion-card-content>
+      </ion-card>
+</ion-content> -->
+
+<ion-header>
+  <dc-header title="Ocorrências" [showBackButton]="true" [showSearchBar]="false" [showOrder]="false"></dc-header>
+</ion-header>
+
+<ion-content class="cards-bg social-cards">
+
+<ion-card *ngFor="let complaint of complaints">
+
+  <ion-item>
+    <ion-avatar item-start>
+      <img src="https://ssl.gstatic.com/images/branding/product/1x/avatar_circle_blue_512dp.png"/>
+    </ion-avatar>
+    <h2>{{complaint.name}}</h2>
+    <p>{{complaint.dateView}}</p>
+  </ion-item>
+
+  <img src="{{complaint.images[0].url}}"/>
+
+  <ion-card-content>
+    <p>{{complaint.note}}</p>
+  </ion-card-content>
+
+  <ion-row>
+    <ion-col>
+      <!-- <button ion-button color="primary" clear small icon-start>
+        <ion-icon name='thumbs-up'></ion-icon>
+        12 Likes
+      </button> -->
+    </ion-col>
+    <ion-col>
+      <!-- <button ion-button color="primary" clear small icon-start>
+        <ion-icon name='text'></ion-icon>
+        4 Comentários
+      </button> -->
+    </ion-col>
+    <ion-col align-self-center text-center>
+      <ion-note>
+       Há {{complaint.difDate}} Dias
+      </ion-note>
+    </ion-col>
+  </ion-row>
+  <!-- <ion-card >
+      <ion-item class="comentario">
+          <ion-avatar item-start>
+            <img src="https://ssl.gstatic.com/images/branding/product/1x/avatar_circle_blue_512dp.png"/>
+          </ion-avatar>
+          <h2>blablabla</h2>
+          <p>blbalbalblalbal</p>
+        </ion-item>
+  </ion-card> -->
+
+</ion-card>

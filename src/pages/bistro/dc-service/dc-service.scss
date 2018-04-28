@@ -1,35 +1,46 @@
 page-dc-service {
-    .row,
-    .col {
-        padding: 0;
-    }
-    .item {
-        padding: 10px map-get($DCSizes, defaultPadding);
-        border-bottom: solid 1px map-get($DCColors, lightgray);
-        .col-text {
-            display: flex;
-            padding-left: 10px;
-            flex-direction: column;
-            justify-content: space-around;
-            justify-content: space-evenly;
-            .title {
-                font-size: map-get($DCSizes, big);
-                color: map-get($DCColors, black);
-                font-weight: bold;
-                display: block;
+
+  ion-content{
+    background-image: url('assets/bistro/images/main-icon/logo.png');
+  } 
+
+    .col-50, .col-33 {
+        display: flex;
+      }
+      .card {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    
+      }
+      .item-avatar, .item.tabs {
+        flex: 0 0 auto;
+      }
+      .item-body {
+        flex: 1 1 auto;
+      }
+    ion-card {
+       
+     
+        color: map-get($DCColors, gray);
+        font-size: 1em;
+        width: 20em;
+        height: 100%;
+    
+        
+        ion-card-content{
+       
+            img{
+                width:5em;
+                height:100%;
+                padding-left: 3em;
+                padding-top:10px;
+          
             }
-            .des {
-                color: map-get($DCColors, gray);
-            }
+         
+     
+               
         }
-        .col-img {
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
-            padding: 0 5px;
-            img {
-                width: 100%;
-            }
-        }
-    }
+
+      }
 }

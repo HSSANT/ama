@@ -10,53 +10,44 @@ import { AppControllerProvider } from '../../../providers/bistro/app-controller/
 export class DcServicePage {
 
 
-
-  // serviceItems = [
-  //   {
-  //     title: "Reserva",
-  //     des: "Por favor, reserve pelo menos 1 hora antes da chegada para obter o melhor serviço",
-  //     icon: "icon_booking.png",
-  //     page: "DcTakeSeatPage"
-  //   },
-  //   {
-  //     title: "Entrega",
-  //     des: "Pagamento e entrega em dinheiro ou cartão de crédito, Paypal",
-  //     icon: "icon_ship.png",
-  //     page: "DcShipPage"
-  //   },
-  //   {
-  //     title: "Ajuda no Local",
-  //     des: "O pessoal do restaurante será imediatamente enviado à sua mesa para receber o pedido",
-  //     icon: "icon_help.png",
-  //     page: "DcSupportPage"
-  //   },
-  //   {
-  //     title: "Chamar táxi",
-  //     des: "Os táxis estarão disponíveis dentro de 5-10 minutos",
-  //     icon: "icon_taxi.png",
-  //     page: "DcTaxiPage"
-  //   },
-  // ]
   
 
   serviceItems = [
     {
-      title: "Oque há por perto",
+      title: "Conta",
       des: "Use o serviço de localização para encontrar as melhores ofertas próximas a você",
-      icon: "icon_nearme.png",
-      page: "DcTaxiPage"
+      icon: "cpf.png",
+      page: ""
     },
     {
-      title: "Faça aqui sua busca",
+      title: "Ocorrências",
       des: "Encontre promoções",
-      icon: "icon_paidsearch.png",
-      page: "DcHomePage"
+      icon: "alertaexclamacao.png",
+      page: "ComplaintPage"
     },
     {
-      title: "Quero colocar meu comércio no iBookLet",
+      title: "Vazamento",
       des: "Preencha nosso formulário e aguarde nosso contato",
-      icon: "icon_shopfilled.png",
-      page: "DcSupportPage"
+      icon: "vazamento.png",
+      page: "StoreAdminPage"
+    },
+    {
+      title: "Falta de Água",
+      des: "Preencha nosso formulário e aguarde nosso contato",
+      icon: "faltadeagua.png",
+      page: ""
+    },
+    {
+      title: "Guia",
+      des: "Preencha nosso formulário e aguarde nosso contato",
+      icon: "tutoriais.png",
+      page: "GuidePage"
+    },
+    {
+      title: "Contatos",
+      des: "Preencha nosso formulário e aguarde nosso contato",
+      icon: "contato.png",
+      page: "ContactPage"
     },
   ]
 

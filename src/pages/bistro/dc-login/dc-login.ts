@@ -8,8 +8,8 @@ import { AppControllerProvider } from '../../../providers/bistro/app-controller/
   templateUrl: 'dc-login.html',
 })
 export class DcLoginPage {
-  phone = "0169696969";
-  password = "ijusthadsex";
+  phone = "962696997";
+  password = "janadolphin";
   loginForm: FormGroup;
   isSubmitted = false;
   phoneErrorMessage = "";

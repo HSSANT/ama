@@ -1,0 +1,31 @@
+
+ <!-- <ion-header>
+        <dc-header title="Ocorrências" [showBackButton]="true" [showSearchBar]="false" [showOrder]="false"></dc-header>
+</ion-header>
+<ion-content>
+
+    <ion-card *ngFor="let complaint of complaints">
+      <img src="{{complaint.images[0].url}}"/>
+        <ion-card-content>
+          <ion-card-title>
+           aberto por:{{complaint.name}}
+            </ion-card-title>
+          <p>
+            area:{{complaint.area}}
+            descrição:{{complaint.note}}
+          </p>
+       </ion-card-content>
+      </ion-card>
+</ion-content> -->
+
+<ion-header>
+  <dc-header title="Contatos" [showBackButton]="true" [showSearchBar]="false" [showOrder]="false"></dc-header>
+</ion-header>
+<ion-slides pager initialSlide=0>
+    <ion-slide padding>
+      <img src="assets/bistro/images/main-icon/logo.png" class="slider-image" />
+      <strong>janaina.ambiental@yahoo.com</strong></p>
+
+  
+    </ion-slide>
+  </ion-slides>

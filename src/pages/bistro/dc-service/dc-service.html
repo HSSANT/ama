@@ -1,8 +1,32 @@
 <ion-header>
-    <dc-header title="Serviços" [showSearchBar]="false"></dc-header>
+    <dc-header title="Menu" [showOrder]="false" [showSearchBar]="false"></dc-header>
 </ion-header>
-<ion-content>
-    <div class="dc-content">
+
+
+        <ion-content padding class="card-background-page">
+       
+              <ion-grid>
+                <ion-row>
+                    <ion-col (tap)="gotoService(item)" width-100 *ngFor="let item of serviceItems">
+                        <ion-card>
+                                <ion-card-content>
+                                <ion-row center>
+                                    <ion-col col-12>
+                                    <img   src="assets/bistro/images/service/{{item.icon}}" alt="">
+                                    </ion-col>
+                                </ion-row>
+                                <ion-row>
+                                        <ion-col col-12>
+                                    <div text-center class="card-subtitle  text-wrap"><span >{{item.title}}</span></div>
+                                    </ion-col>
+                                </ion-row>
+                                </ion-card-content>
+                        </ion-card>
+                    </ion-col>
+                </ion-row>
+              </ion-grid>
+              </ion-content>
+    <!-- <div class="dc-content">
         <div class="item" (click)="gotoService(item)" *ngFor="let item of serviceItems">
             <ion-row>
                 <ion-col col-3 class="col-img">
@@ -14,5 +38,4 @@
                 </ion-col>
             </ion-row>
         </div>
-    </div>
-</ion-content>
+    </div> -->

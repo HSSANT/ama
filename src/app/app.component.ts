@@ -52,7 +52,7 @@ export class MyApp {
  
 
   itemClick(menuItem) {
-    this.appController.setRootPage(menuItem.page);
+    this.appController.pushPage(menuItem.page);
     this.closeMenu();
   }
 
@@ -72,6 +72,11 @@ export class MyApp {
   gotoRegister() {
     this.closeMenu();
     this.app.getActiveNav().push("DcRegisterPage");
+  }
+
+  GoToGuide(){
+    this.closeMenu();
+    this.app.getActiveNav().push("GuidePage");
   }
   closeMenu(): Promise<any> {
     this.setMenuZIndex(0);

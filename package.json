@@ -31,6 +31,7 @@
     "angularfire2": "^5.0.0-rc.6",
     "com.googlemaps.ios": "https://github.com/mapsplugin/cordova-plugin-googlemaps-sdk",
     "cordova-android": "6.4.0",
+    "cordova-browser": "5.0.3",
     "cordova-ios": "^4.4.0",
     "cordova-plugin-camera": "^4.0.2",
     "cordova-plugin-compat": "^1.2.0",
@@ -78,7 +79,8 @@
     },
     "platforms": [
       "android",
-      "ios"
+      "ios",
+      "browser"
     ]
   }
 }

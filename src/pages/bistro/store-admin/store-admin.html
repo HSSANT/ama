@@ -1,18 +1,18 @@
 <ion-header>
-    <dc-header title="Reserva de Mesa" [showBackButton]="true" [showSearchBar]="false" [showOrder]="false"></dc-header>
+    <dc-header title="Registro de Vazamento" [showBackButton]="true" [showSearchBar]="false" [showOrder]="false"></dc-header>
 </ion-header>
 
 <ion-content>
     <div class="dc-content">
         <div class="dc-banner">
-            <img src="assets/bistro/images/service/image_booking_2.png" alt="">
+            <img src="assets/bistro/images/service/ambev.png" alt="">
             <div class="des">
                 <span>
-                    O IBooklet pede 1 dia de antecedência para cadastrar as novas lojas
+               
                 </span>
                 <br>
                 <span>
-                    Por favor, confirme com atenção as informações recebidas 
+       
               </span>
             </div>
         </div>
@@ -21,46 +21,61 @@
 
         <form (ngSubmit)="continue()" [formGroup]="form">
             <div class="dc-form">
+
+
+                    <ion-row>
+                           <ion-col col-12>
+                               <ion-segment class="input-div" color="primary">
+                                         <ion-segment-button value="Interno" (ionSelect)="selectInterno()">
+                                           Interno
+                                         </ion-segment-button>
+                                         <ion-segment-button value="externo" (ionSelect)="selectExterno()">
+                                           Externo
+                                         </ion-segment-button>
+                                       </ion-segment>
+                                    </ion-col>
+                        </ion-row>
+
                 <ion-row>
                     <ion-col col-12>
-                        <div class="input-div" (click)="pickPlace($event)">
+                        <div class="input-div" (tap)="pickPlace($event)">
                             <span class="icon">
                                 <i class="fa fa-map-marker" aria-hidden="true"></i>
                             </span>
-                            <ion-input  (tab)="continueAddress()" [(ngModel)]="this.txtAddress" formControlName="address"  [ngClass]="{'dc-gray': !currentAddress, 'dc-balack': currentAddress}"></ion-input>
+                            <ion-input  (tab)="continueAddress()" [(ngModel)]="this.txtAddress" formControlName="address"  ></ion-input>
                         </div>
                     </ion-col>
                     </ion-row>
-                 
                     <ion-row>
-                    <ion-col col-6>
+                    <ion-col col-6 (tap)="datePicker.open()">
+                            <div class="input-div">
+                                <span class="icon"> 
+                                  <i class="fa fa-calendar" aria-hidden="true"></i>
+                              </span>
+                                <ion-input   [(ngModel)]="date" formControlName="date" placeholder="Data da Ocorrencia  "></ion-input>
+                                <ion-datetime #datePicker displayFormat="DD/MM/YYYY" [min]="currentDateString" [max]="maxDateString" (ionChange)="dateChange($event)"></ion-datetime>
+                            </div>
+                        </ion-col>
+                 
+                  
+                    <ion-col col-6 (tap)="datePickerHour.open()">
                         <div class="input-div">
                             <span class="icon">
                               <i class="fa fa-clock-o" aria-hidden="true"></i>
                           </span>
-                            <ion-input [(ngModel)]="startTime" formControlName="startTime" placeholder="Abertura"></ion-input>
-                            <ion-datetime displayFormat="HH:mm" (ionChange)="changeTime($event,true)"></ion-datetime>
+                            <ion-input [(ngModel)]="startTime" formControlName="startTime" placeholder="Hora da Ocorrencia"></ion-input>
+                            <ion-datetime #datePickerHour displayFormat="HH:mm" (ionChange)="changeTime($event,true)"></ion-datetime>
 
                         </div>
                     </ion-col>
-                    <ion-col col-6>
-                            <div class="input-div">
-                                    <span class="icon">
-                                      <i class="fa fa-clock-o" aria-hidden="true"></i>
-                                  </span>
-                                    <ion-input [(ngModel)]="endTime" formControlName="endTime" placeholder="Fechamento"></ion-input>
-                                    <ion-datetime displayFormat="HH:mm" (ionChange)="changeTime($event)"></ion-datetime>
-        
-                                </div>
-                    </ion-col>
-                </ion-row>
+                </ion-row> 
                 <ion-row>
                     <ion-col col-12>
                         <div class="input-div">
                             <span class="icon"> 
                             <i class="fa fa-user" aria-hidden="true"></i>
                         </span>
-                            <ion-input [(ngModel)]="name" formControlName="name" placeholder="Nome do Estabelecimento"></ion-input>
+                            <ion-input [(ngModel)]="name" formControlName="name" placeholder="Nome"></ion-input>
                         </div>
                     </ion-col>
                 </ion-row>
@@ -75,15 +90,69 @@
                     </ion-col>
                 </ion-row>
                 <ion-row>
-                    <ion-col col-12>
+                <ion-col col-12>
+             
+                        <div class="input-div">
+                            <span class="icon"> 
+                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                        </span>
+                            <ion-input [(ngModel)]="area" formControlName="area" placeholder="Area"></ion-input>
+                        </div>
+              
+                    </ion-col>
+
+                </ion-row>
+                <ion-row>
+
+                    <!-- <ion-col col-12>
                         <div class="input-div" (click)="uploadFoto($event)">
                             <span class="icon"> 
                             <i class="fa fa-photo" aria-hidden="true"></i>
                         </span>
                             <ion-input [(ngModel)]="url" (tab)="uploadFoto($event)" formControlName="url" placeholder="Logo"></ion-input>
                         </div>
+                    </ion-col> -->
+                    <ion-col col-12>
+                         
+                    <ion-slides loop zoom id="input-div slider"  pager="true" >
+                              <ion-slide  *ngFor="let image of images">
+                                <img [src]="image.url" class="img"   aria-hidden="true"  />
+                                
+                              </ion-slide>
+                    </ion-slides>
+                    
+                    </ion-col>
+                    
+                 
+                     
+                </ion-row>
+          
+                  <div class="dc-card">
+                       
+                            <ion-row center text-center >
+                            <!-- //botoes menores foto -->
+                                <ion-col  col-3 *ngFor="let image of images">
+                                     
+                                        <img src="assets/bistro/images/service/camera.png"  (tap)="uploadFoto(image)" aria-hidden="true" class= "img" />
+                                  
+                                </ion-col>
+                                
+                            </ion-row>
+              
+                        </div>
+           
+                <ion-row center>
+                <ion-col col-12>
+                 
+                        <div class="input-div">
+                            <span class="icon"> 
+                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                        </span>
+                            <ion-textarea [(ngModel)]="note" formControlName="note" placeholder="Descrição"></ion-textarea>
+                        </div>
                     </ion-col>
                 </ion-row>
+             
             </div>
             <div class="error-message">{{errorMessage}}</div>
             <div class="button-group">

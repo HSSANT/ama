@@ -6,9 +6,12 @@
         </span>
         <span class="header-button button-left" navPop *ngIf="showBackButton">
             <!-- <ion-icon name="{{backButton}}"></ion-icon> -->
-            <img class="icon" src="{{backButton}}" alt="">            
+            <img class="icon" src="{{backButton}}" alt="">             
         </span>
         <span class="title dc-big" (tap)="scrollToTop()">
+               
+
+            
          {{title}}
         </span>
         <span *ngIf="showOrder" class="header-button button-right" >

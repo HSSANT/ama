@@ -1,12 +1,12 @@
 <ion-header>
-    <dc-header [showSearchBar]="false" [showBackButton]="true" [showOrder]="false" [title]="'Iniciar sessão'"> </dc-header>
+    <dc-header [showSearchBar]="false" [showBackButton]="true" [showOrder]="false" [title]="'Login'"> </dc-header>
 </ion-header>
 
 
 <ion-content>
     <div class="dc-content">
         <div class="logo-image">
-            <img src="https://i.imgur.com/77goK1b.png" alt="">
+            <img src="assets/bistro/images/login/logo.png" alt="">
         </div>
 
         <form (ngSubmit)="login()" [formGroup]="loginForm">
@@ -14,14 +14,14 @@
                 <div class="input-div">
                     <!-- <span class="icon" [class.valid]="loginForm.controls.phone.valid && loginForm.controls.phone.dirty"><i class="fa fa-phone" aria-hidden="true"></i></span> -->
                     <span class="icon">
-                                    <img src="assets/bistro/images/login/icon_phone.png" alt=""  >
+                            <i class="fa fa-user" aria-hidden="true"></i>
                             </span>
                     <ion-input type="tel" [(ngModel)]="phone" formControlName="phone" placeholder="Número de telefone" (ionChange)="checkForm()"></ion-input>
                 </div>
                 <span *ngIf="!loginForm.controls.phone.valid && isSubmitted" class="validate-message">{{phoneErrorMessage}}</span>
                 <div class="input-div">
                     <span class="icon">
-                                    <img src="assets/bistro/images/login/icon_password.png" alt=""  >
+                            <i class="fa fa-lock" aria-hidden="true"></i>
                             </span>
                     <ion-input type="password" [(ngModel)]="password" formControlName="password" placeholder="Senha" (ionChange)="checkForm()">
                     </ion-input>
@@ -47,7 +47,7 @@
                   </span>
         </div>
         <div class="register-button">
-            <span (tap)="gotoRegister()">Já tem uma conta?</span>
+             <span (tap)="gotoRegister()">Registrar-se</span> 
         </div>
     </div>
 </ion-content>

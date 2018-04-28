@@ -157,8 +157,8 @@ $headerRowHeight: 45px;
                 border-top: solid 1px #98262e;
             }
             &.active {
-                background-color: #98262e;
-                border-left: solid 6px map-get($DCColors, yellow);
+                background-color: darkblue;
+                border-left: solid 6px map-get($DCColors, white);
                 font-weight: bold;
                 padding-left: 14px;
             }
@@ -166,7 +166,7 @@ $headerRowHeight: 45px;
                 font-size: 1.2em;
                 margin: auto 0;
                 margin-right: 8px;
-                color: map-get($DCColors, yellow);
+                color: map-get($DCColors, white);
                 width: 1.2em;
                 height: 1.2em;
                 display: inline-block;
@@ -228,7 +228,7 @@ $headerRowHeight: 45px;
                 text-align: left;
                 font-size: 1.5em;
                 line-height: .9em;
-                color: map-get($DCColors, yellow);
+                color: map-get($DCColors, white);
             }
         }
         .step-number {
@@ -431,7 +431,7 @@ $headerRowHeight: 45px;
         position: relative;
         padding: $divPadding;
     }
-    .text-input {
+    .text-input  {
         width: 100%;
         border: solid 1px map-get($DCColors, lightgray);
         border-radius: 20px;
@@ -442,6 +442,20 @@ $headerRowHeight: 45px;
         margin: 0;
         padding-right: 10px;
         background-color: map-get($DCColors, white);
+    }
+
+    ion-segment {
+        ion-segment-button{
+        border: solid 1px map-get($DCColors, lightgray);
+        border-radius: 20px !important;
+        line-height: $inputHeight;
+      
+        text-align: center;
+        color: map-get($DCColors, black);
+        margin: 0;
+        padding-right: 10px;
+        background-color: map-get($DCColors, white);
+        }
     }
     ion-textarea {
         .text-input {

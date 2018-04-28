@@ -1,8 +1,8 @@
 export const FIREBASE_CREDENTIALS = {
-    apiKey: "AIzaSyCsvPaNQN36cZvnOc4sODuI0F_UESlnWDE",
-    authDomain: "ibooklet-b9ff0.firebaseapp.com",
-    databaseURL: "https://ibooklet-b9ff0.firebaseio.com",
-    projectId: "ibooklet-b9ff0",
-    storageBucket: "ibooklet-b9ff0.appspot.com",
-    messagingSenderId: "1048756582772"
+    apiKey: "AIzaSyA_QmmHENF2mK1-lvPLAIzIq6sA1BB2QQ0",
+    authDomain: "iacquaprotect.firebaseapp.com",
+    databaseURL: "https://iacquaprotect.firebaseio.com",
+    projectId: "iacquaprotect",
+    storageBucket: "iacquaprotect.appspot.com",
+    messagingSenderId: "26408737152"
 };

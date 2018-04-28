@@ -1,24 +1,35 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import { Component,ViewChild, ViewContainerRef, ViewChildren } from '@angular/core';
+import { IonicPage, NavController, NavParams, ViewController, LoadingController, AlertController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { AppControllerProvider } from '../../../providers/bistro/app-controller/app-controller';
 import { BookedSeat } from '../../../providers/bistro/classes/service';
 import { Address } from '../../../providers/bistro/classes/address';
 import { Store } from '../../../providers/bistro/classes/store';
+import { Complaint } from '../../../providers/bistro/classes/complaint';
+import { DcServicePage } from '../dc-service/dc-service';
 
 @IonicPage()
 @Component({
   selector: 'page-store-admin',
-  templateUrl: 'store-admin.html',
+  templateUrl: 'store-admin.html', 
 })
 export class StoreAdminPage {
+
  
+//instanciar datepicker
+@ViewChildren('datePicker') datePicker;
+
+
 //campos do address
   formAddress:FormGroup;
   adress: string = "";
   txtAddress:string;
   isSubmitedAddress = false;
+  countFotos = 0;
   currentAddress: Address;
+  area:any;
+  extInt:any;
+  images: any[] = [{id:0,url:"assets/bistro/images/service/camera.png"},{id:1,url:"assets/bistro/images/service/camera.png"},{id:2,url:"assets/bistro/images/service/camera.png"}];
 
   //campos do Store
   form: FormGroup;
@@ -35,21 +46,26 @@ export class StoreAdminPage {
   address:string ="";
   url:string ="";
 
-  currentStore: Store = new Store();
+  ocorrencia: Complaint;
 
   dateRegex = /^(((0?[1-9]|[12]\d|3[01])[- /.](0?[13578]|1[02])[- /.]((1[6-9]|[2-9]\d)\d{2}))|((0?[1-9]|[12]\d|30)[- /.](0?[13456789]|1[012])[- /.]((1[6-9]|[2-9]\d)\d{2}))|((0?[1-9]|1\d|2[0-8])[- /.]0?2[- /.]((1[6-9]|[2-9]\d)\d{2}))|(29[- /.]02[- /.]((1[6-9]|[2-9]\d)(0?[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))))$/;
   timeRegex = /^([01]?\d|2[0-3]):([0-5]\d)$/;
   errorMessage = "";
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    public formBuilder: FormBuilder, public viewCtrl: ViewController,
+    public formBuilder: FormBuilder, public viewCtrl: ViewController, private _loadingCtrl: LoadingController ,public alertController:AlertController,
     public appCtrl: AppControllerProvider) {
+
+ 
+   
+
     this.form = this.formBuilder.group({
       startTime: ["", Validators.compose([])],
-      endTime: ["", Validators.compose([])],
+      date: ["", Validators.compose([])],
       name: ["", Validators.compose([])],
+      area: ["", Validators.compose([])],
+      note: ["", Validators.compose([])],
       phone: ["", Validators.compose([])],
       address: ["", Validators.compose([])],
-      url: ["", Validators.compose([])],
     });
     let date = new Date();
     this.currentDateString = this.getDateString(date);
@@ -64,12 +80,29 @@ export class StoreAdminPage {
     )
 
   }
+  loading;
+  
+  showLoading() {
+      if(!this.loading){
+          this.loading = this._loadingCtrl.create({
+              content: 'Aguarde...'
+          });
+          this.loading.present();
+      }
+  }
+  
+  dismissLoading(){
+      if(this.loading){
+          this.loading.dismiss();
+          this.loading = null;
+      }
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad store admin');
   }
   ionViewDidEnter(){
-    this.currentAddress = this.appCtrl.getAddressService().getCurrentAddress();
+    this.currentAddress = this.appCtrl.getAddressService().currentAddress;
     this.txtAddress = this.getTarget(this.currentAddress);
   }
 
@@ -95,7 +128,9 @@ export class StoreAdminPage {
   }
 
   getBack() {
-    this.viewCtrl.dismiss();
+
+
+    this.navCtrl.pop();
   }
 
   continue() {
@@ -103,18 +138,23 @@ export class StoreAdminPage {
       this.isSubmited = true;
      
 
+
       
       this.form.controls.startTime.setValidators(Validators.compose([Validators.required, Validators.pattern(this.timeRegex)]));
       this.form.controls.address.setValidators(Validators.compose([Validators.required]));
-      this.form.controls.endTime.setValidators(Validators.compose([Validators.required, Validators.pattern(this.timeRegex)]));
+      this.form.controls.date.setValidators(Validators.compose([Validators.required, Validators.pattern(this.dateRegex)]));
       this.form.controls.name.setValidators(Validators.compose([Validators.required]));
-      this.form.controls.url.setValidators(Validators.compose([Validators.required]));
+      this.form.controls.area.setValidators(Validators.compose([Validators.required]));
+      this.form.controls.note.setValidators(Validators.compose([Validators.required]));
       this.form.controls.phone.setValidators(Validators.compose([Validators.required, Validators.maxLength(20), Validators.minLength(8), Validators.pattern(/^\d+$/)]));
       for (let key in this.form.controls) {
         this.form.controls[key].updateValueAndValidity();
       }
     }
     if (this.form.valid) {
+
+      this.showLoading();
+      let date = new Date();
       let dateStart = new Date();
       let dateEnd = new Date();
       let dateInput = ["", "", ""];
@@ -126,35 +166,71 @@ export class StoreAdminPage {
           dateInput[index] += c;
         }
       });
-      // date.setFullYear(+dateInput[2]);
-      // date.setMonth(+dateInput[1] - 1);
-      // date.setDate(+dateInput[0]);
+      date.setFullYear(+dateInput[2]);
+       date.setMonth(+dateInput[1] - 1);
+       date.setDate(+dateInput[0]);
       let startTimeInput = this.startTime.split(":");
       dateStart.setHours(+startTimeInput[0]);
       dateStart.setMinutes(+startTimeInput[1]);
-      let endTimeInput = this.startTime.split(":");
-      dateEnd.setHours(+endTimeInput[0]);
-      dateEnd.setMinutes(+endTimeInput[1]);
-      console.log(startTimeInput);
-      console.log(endTimeInput);
-      console.log(dateStart.toLocaleDateString(),dateStart.toLocaleTimeString());
+      // console.log(startTimeInput);
+      // console.log(this.date);
+      // console.log(dateStart.toLocaleDateString(),this.date);
+      console.log(this.appCtrl.getAddressService().currentAddress);
+      
+       
+      this.ocorrencia = new Complaint();
 
-
-      this.currentStore.setAddress(this.appCtrl.getAddressService().getCurrentAddress());
-      this.name = this.name;
-      this.currentStore.startTime = dateStart.toLocaleTimeString();
-      this.currentStore.endTime = dateEnd.toLocaleTimeString();
-      this.currentStore.phoneNumber = 1111111;
-      this.currentStore.id = 1;
+      this.ocorrencia.setAddress(this.appCtrl.getAddressService().getCurrentAddress());
+      this.ocorrencia.name = this.name;
+      this.ocorrencia.startTime = startTimeInput;
+      this.ocorrencia.date = dateInput;
+      this.ocorrencia.images = this.images;
+      this.ocorrencia.phoneNumber = Number(this.phone);
+      this.ocorrencia.extInt =  this.extInt;
+      this.ocorrencia.area = this.area;
+      this.ocorrencia.id = 1;
       
 
 
-      if(!this.appCtrl.getStoreService().addStore(this.currentStore))
-        console.log("ocorreu um erro ao inserir");
-      this.getBack();
-      this.appCtrl.showToast("Solicitação Conclúida");
+      this.appCtrl.getStoreService().addFireBaseData(this.ocorrencia,"vazamento").then( success =>
+        {
+                 let mno=this.alertController.create({
+                  title:"Recebemos Sua Ocorrência",
+                  message:"Solicitação concluida com sucesso",
+                  buttons:[{text:'Ok',handler: ()=>{
 
-    } else {
+                    this.navCtrl.pop().then(data => {
+                      mno.dismiss();
+                      this.dismissLoading();
+                    });
+                    return false;
+                    
+                  }}]
+                });
+                mno.present();
+        }).catch( Error =>{
+          console.log("ocorreu um erro ao inserir" + JSON.stringify(Error));
+          let mno=this.alertController.create({
+            title:"Ops! Sua Ocorrência não foi conclúida :(",
+            message:"Erro ao inserir registro" ,
+            buttons:[{text:'Ok',handler: ()=>{
+              mno.dismiss();
+              this.dismissLoading();
+              this.viewCtrl.dismiss();
+              this.navCtrl.pop();
+              return false;
+            }}]
+          });
+     
+          }
+        );
+     
+
+
+
+
+    }
+    else{
       let required = false;
       for (var key in this.form.controls) {
         if (this.form.controls.hasOwnProperty(key)) {
@@ -167,15 +243,25 @@ export class StoreAdminPage {
         this.errorMessage = "Preencha os Campos Obrigatórios";
       } else {
         let fields = [];
-        if (this.form.controls.startTime.errors && this.form.controls.startTime.errors.hasOwnProperty("pattern")) fields.push("Hora de abertura");
-        if (this.form.controls.endTime.errors && this.form.controls.endTime.errors.hasOwnProperty("pattern")) fields.push("Hora de Fechamento");
+        if (this.form.controls.startTime.errors && this.form.controls.startTime.errors.hasOwnProperty("pattern")) fields.push("Hora");
+        if (this.form.controls.date.errors && this.form.controls.endTime.errors.hasOwnProperty("pattern")) fields.push("Data");
         if (this.form.controls.name.errors && this.form.controls.name.errors.hasOwnProperty("pattern")) fields.push("Nome");
         if (this.form.controls.phone.errors && this.form.controls.phone.errors.hasOwnProperty("pattern")) fields.push("Número de telefone");
-        this.errorMessage = fields.join(', ') + " Erro em ";
-      }
-
+        if (this.form.controls.note.errors && this.form.controls.note.errors.hasOwnProperty("pattern")) fields.push("Descrição");
+        
+        this.errorMessage = fields.join(', ') + " Estão Incorretos ";
+        console.log(fields);
     }
 
+  }
+}
+
+
+  selectInterno(){
+    this.extInt = "interno";
+  }
+  selectExterno(){
+    this.extInt = "externo";
   }
 
  //metodos de busca maps
@@ -199,7 +285,7 @@ getTarget(address: Address) {
       return address.name + " " + address.address;
     }
   }
-  return "Destino";
+  return "Informe o Local do Vazamento";
 }
 
 pickPlace(event) {
@@ -207,9 +293,26 @@ pickPlace(event) {
 }
 
 
-uploadFoto(event) {
-  this.appCtrl.getStoreService().selectPhoto();
-  this.url="Upload Efetuado";
+uploadFoto(image:any) {
+   
+  this.showLoading();
+ 
+    this.appCtrl.getStoreService().selectPhoto().then( data =>{
+     var res = data;
+     this.url = String(res);
+      console.log(this.url);
+    
+      this.images[image.id].url = this.url;
+      console.log(this.images);
+      this.dismissLoading();
+
+    }).catch( Error => {
+      this.dismissLoading();
+    });
+    this.countFotos++;
+    
+
+ 
 }
 
 }
